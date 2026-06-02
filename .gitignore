@@ -1,8 +1,6 @@
-*.gem
-.bundle
-.jekyll-cache
-.sass-cache
-_site
-Gemfile.lock
 node_modules
 .DS_Store
+*.log
+.vite
+
+# Note: `docs/` is intentionally committed — it is the built site served by GitHub Pages.
