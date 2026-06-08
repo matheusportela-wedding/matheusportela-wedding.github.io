@@ -1,9 +1,8 @@
 // sections.jsx — the page sections of the wedding site. Each takes the active
 // theme `t` and the active language dictionary `L` (from content.js).
 import React, { useState } from 'react';
-import { SP, KSprig, KPalm, KLeaf, KRibbon, Photo, Icons, FlagBR, FlagUS } from './kit.jsx';
+import { SP, KRibbon, Photo, Icons, FlagBR, FlagUS } from './kit.jsx';
 import { Wrap, Eye, Calli, Txt, SectionHead, IconBadge, Card, Section } from './primitives.jsx';
-import { CT } from './themes.js';
 import { useViewport } from './useViewport.js';
 
 // Responsive column helper: as many equal columns as fit, collapsing to a single
@@ -74,31 +73,25 @@ export const Nav = ({ t, L, tab, setTab, lang, setLang }) => {
 
 // ---------- HERO ----------
 export const Hero = ({ t, L }) => {
-  const dark = t.heroTone === 'dark';
   const icons = [Icons.calendar, Icons.clock, Icons.pin];
   return (
     <section id="inicio" style={{ position: 'relative', minHeight: 620, background: t.heroBg, color: t.heroFg, overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
-      {t.motif === 'palm' && <React.Fragment>
-        <div style={{ position: 'absolute', left: -70, bottom: -60 }}><KPalm w={300} h={500} color={SP.lime} opacity={0.5} /></div>
-        <div style={{ position: 'absolute', right: -70, top: -70, transform: 'scaleX(-1) scaleY(-1)' }}><KPalm w={280} h={470} color={t.accent} opacity={0.45} /></div>
-      </React.Fragment>}
-      {t.motif === 'line' && <div style={{ position: 'absolute', top: 90, left: '50%', transform: 'translateX(-50%)' }}><KSprig w={64} h={32} color={SP.olive} /></div>}
       <Wrap style={{ position: 'relative', textAlign: 'center', width: '100%' }}>
-        <Eye t={t} color={dark ? 'rgba(255,255,255,0.85)' : t.accentDeep}>{L.hero.eyebrow}</Eye>
+        <Eye t={t} color="rgba(255,255,255,0.85)">{L.hero.eyebrow}</Eye>
         <Calli size={'clamp(54px, 15vw, 172px)'} color={t.heroFg} style={{ margin: '2px 0 0' }}>Anna <span style={{ color: t.accent }}>&amp;</span> Matheus</Calli>
-        <Txt t={t} size={20} color={dark ? 'rgba(255,255,255,0.92)' : t.inkSoft} style={{ fontStyle: 'italic', marginTop: 6 }}>{L.hero.dateItalic}</Txt>
+        <Txt t={t} size={20} color="rgba(255,255,255,0.92)" style={{ fontStyle: 'italic', marginTop: 6 }}>{L.hero.dateItalic}</Txt>
         <div style={{ display: 'flex', gap: 14, justifyContent: 'center', marginTop: 30, flexWrap: 'wrap' }}>
           {L.hero.chips.map((label, i) => {
             const Icon = icons[i];
             return (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 18px', borderRadius: 40, border: `1px solid ${dark ? 'rgba(255,255,255,0.3)' : t.line}`, color: t.heroFg }}>
-                <Icon w={18} stroke={dark ? t.featureAccent : t.accentDeep} /><span style={{ fontFamily: t.body, fontSize: 15.5, letterSpacing: '0.04em' }}>{label}</span>
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 18px', borderRadius: 40, border: '1px solid rgba(255,255,255,0.3)', color: t.heroFg }}>
+                <Icon w={18} stroke={t.heroAccent} /><span style={{ fontFamily: t.body, fontSize: 15.5, letterSpacing: '0.04em' }}>{label}</span>
               </div>
             );
           })}
         </div>
       </Wrap>
-      {t.motif !== 'line' && <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}><KRibbon colors={t.ribbon} h={12} /></div>}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}><KRibbon colors={t.ribbon} h={12} /></div>
     </section>
   );
 };
@@ -108,11 +101,7 @@ export const CoupleIntro = ({ t, L }) => (
   <Section id="nos" bg={t.page} pad="96px 0">
     <Wrap>
       <div style={{ display: 'grid', gridTemplateColumns: COLS(340), gap: 'clamp(28px, 5vw, 60px)', alignItems: 'center' }}>
-        <div style={{ position: 'relative' }}>
-          <Photo label="couple portrait" h={540} bg={t.motif === 'palm' ? SP.coralDeep : SP.olive} radius={2} />
-          {t.motif === 'line' && <div style={{ position: 'absolute', top: -22, left: -22 }}><KSprig w={70} h={34} color={SP.olive} /></div>}
-          {t.motif === 'palm' && <div style={{ position: 'absolute', bottom: -24, right: -24 }}><KLeaf w={70} h={112} color={t.accent} /></div>}
-        </div>
+        <Photo label="couple portrait" h={540} bg={SP.olive} radius={2} />
         <div>
           <Eye t={t}>{L.couple.eyebrow}</Eye>
           <Calli size={'clamp(46px, 9vw, 94px)'} color={t.ink} style={{ margin: '4px 0 16px' }}>{L.couple.title}</Calli>
@@ -174,7 +163,7 @@ export const EventSection = ({ t, L }) => {
           ))}
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: COLS(320), gap: 28, alignItems: 'stretch' }}>
-          <Photo label="espaço renascença · garden" h={340} bg={t.motif === 'line' ? SP.olive : SP.oliveSoft} radius={2} style={{ minHeight: 280, height: '100%' }} />
+          <Photo label="espaço renascença · garden" h={340} bg={SP.oliveSoft} radius={2} style={{ minHeight: 280, height: '100%' }} />
           <Card t={t} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 18 }}>
             {E.rows.map(([label, text], i) => {
               const Icon = rowIcons[i];
@@ -395,18 +384,4 @@ export const Footer = ({ t, L }) => (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: 22 }}><KRibbon colors={t.ribbon} w={180} h={6} radius={3} /></div>
     <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '0.2em', marginTop: 22, opacity: 0.6 }}>#ANNAEMATHEUS2026 · annaematheus@email.com</div>
   </footer>
-);
-
-// ---------- THEME SWITCHER ----------
-export const Switcher = ({ tkey, setKey }) => (
-  <div style={{ position: 'fixed', right: 20, bottom: 20, zIndex: 100, background: '#fff', borderRadius: 40, boxShadow: '0 10px 30px -8px rgba(0,0,0,0.3)', padding: '8px 10px', display: 'flex', alignItems: 'center', gap: 8 }}>
-    <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#888', padding: '0 4px' }}>Tema</span>
-    {Object.values(CT).map(c => (
-      <button key={c.key} onClick={() => setKey(c.key)} title={c.name} style={{
-        width: 30, height: 30, borderRadius: '50%', cursor: 'pointer',
-        border: tkey === c.key ? `2px solid ${SP.ink}` : '2px solid transparent',
-        background: `linear-gradient(135deg, ${c.ribbon[0]} 50%, ${c.accent} 50%)`, outline: 'none', padding: 0,
-      }} />
-    ))}
-  </div>
 );

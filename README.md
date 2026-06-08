@@ -32,16 +32,15 @@ index.html        Vite entry template (dev only; loads src/main.jsx)
 public/CNAME      Custom domain, copied verbatim into docs/
 src/
   main.jsx        App bootstrap (ReactDOM render)
-  App.jsx         Tab routing + theme/language state, page assembly
+  App.jsx         Tab routing + language state, page assembly
   content.js      ALL guest-facing text, EN + PT  ← edit this for copy changes
-  themes.js       The three colour/typography themes (11 / 12 / 13)
-  kit.jsx         Palette, botanical SVG motifs, photo placeholder, icons, flags
+  themes.js       The single site theme ("Cerrado em Cores") — colours & fonts
+  kit.jsx         Palette, ribbon motif, photo placeholder, icons, flags
   primitives.jsx  Theme-aware layout primitives (Wrap, Card, Section, …)
   sections.jsx    The page sections (Hero, Event, Travel, RSVP, …)
   styles.css      Global resets
 docs/             Built output, committed and served by GitHub Pages
 ```
 
-The floating theme switcher (bottom-right) lets you preview the three themes;
-the choice persists in `localStorage`. To lock a single theme, set the initial
-`tkey` in `src/App.jsx` and remove the `<Switcher/>`.
+The look is driven entirely by the single `theme` object in `src/themes.js` —
+tweak the colours or fonts there and every section updates.

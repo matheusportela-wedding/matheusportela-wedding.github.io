@@ -1,6 +1,6 @@
 // primitives.jsx — theme-aware layout primitives shared across sections.
 import React from 'react';
-import { SP, KLeaf, KRibbon } from './kit.jsx';
+import { KRibbon } from './kit.jsx';
 
 export const Wrap = ({ children, w = 1120, style }) => (
   <div style={{ maxWidth: w, margin: '0 auto', padding: '0 clamp(18px, 4vw, 32px)', ...style }}>{children}</div>
@@ -18,15 +18,13 @@ export const Txt = ({ t, children, size = 17.5, color, style }) => (
   <p style={{ fontFamily: t.body, fontSize: size, lineHeight: 1.72, color: color || t.inkSoft, margin: 0, ...style }}>{children}</p>
 );
 
-export const SectionHead = ({ t, eyebrow, title, intro, light }) => (
+export const SectionHead = ({ t, eyebrow, title, intro }) => (
   <div style={{ textAlign: 'center', maxWidth: 740, margin: '0 auto 52px' }}>
-    <Eye t={t} color={light ? t.featureAccent : t.accentDeep}>{eyebrow}</Eye>
-    <Calli size={'clamp(46px, 9vw, 94px)'} color={light ? t.featureFg : t.ink} style={{ margin: '4px 0 0' }}>{title}</Calli>
-    {intro && <Txt t={t} size={19} color={light ? `${t.featureFg}cc` : t.inkSoft} style={{ marginTop: 14 }}>{intro}</Txt>}
+    <Eye t={t} color={t.accentDeep}>{eyebrow}</Eye>
+    <Calli size={'clamp(46px, 9vw, 94px)'} color={t.ink} style={{ margin: '4px 0 0' }}>{title}</Calli>
+    {intro && <Txt t={t} size={19} color={t.inkSoft} style={{ marginTop: 14 }}>{intro}</Txt>}
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-      {t.motif === 'palm'
-        ? <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><KLeaf w={14} h={22} color={t.accent} /><KLeaf w={18} h={28} color={SP.olive} /><KLeaf w={14} h={22} color={SP.lime} /></div>
-        : <KRibbon colors={t.ribbon} w={150} h={6} radius={3} />}
+      <KRibbon colors={t.ribbon} w={150} h={6} radius={3} />
     </div>
   </div>
 );

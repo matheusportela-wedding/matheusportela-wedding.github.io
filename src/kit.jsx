@@ -1,4 +1,4 @@
-// kit.jsx — low-level visual building blocks: palette, botanical motifs,
+// kit.jsx — low-level visual building blocks: palette, the ribbon motif,
 // photo placeholder, line icons and flag SVGs. No theme or content dependency.
 import React from 'react';
 
@@ -18,41 +18,7 @@ export function kshade(hex, amt) {
   return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
 }
 
-// ---------- botanical motifs ----------
-export const KSprig = ({ w = 30, h = 16, color, sw = 1.1, style }) => (
-  <svg viewBox="0 0 30 16" width={w} height={h} style={style}>
-    <path d="M2 8 L28 8" stroke={color} strokeWidth={sw} />
-    {[5,11,17,23].map(x => (
-      <ellipse key={x} cx={x} cy="4" rx="2.7" ry="1.5" fill={color} transform={`rotate(-30 ${x} 4)`} />
-    ))}
-    {[5,11,17,23].map(x => (
-      <ellipse key={'b'+x} cx={x} cy="12" rx="2.7" ry="1.5" fill={color} transform={`rotate(30 ${x} 12)`} />
-    ))}
-  </svg>
-);
-
-export const KPalm = ({ w = 200, h = 320, color, opacity = 1, transform, sw = 1.5 }) => (
-  <svg viewBox="0 0 200 320" width={w} height={h} style={{ opacity, transform }}>
-    <path d="M100 320 Q98 200 100 30" stroke={color} strokeWidth="2.4" fill="none" />
-    {Array.from({ length: 8 }).map((_, i) => {
-      const y = 40 + i * 22; const len = 70 + i * 4;
-      return (
-        <g key={i}>
-          <path d={`M100 ${y} Q ${100 - len * 0.6} ${y - 14} ${100 - len} ${y - 30}`} stroke={color} strokeWidth={sw} fill="none" />
-          <path d={`M100 ${y} Q ${100 + len * 0.6} ${y - 14} ${100 + len} ${y - 30}`} stroke={color} strokeWidth={sw} fill="none" />
-        </g>
-      );
-    })}
-  </svg>
-);
-
-export const KLeaf = ({ w = 40, h = 64, color, style }) => (
-  <svg viewBox="0 0 40 64" width={w} height={h} style={style}>
-    <path d="M20 2 C40 22 40 44 20 62 C0 44 0 22 20 2 Z" fill={color} />
-    <path d="M20 8 L20 56" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
-  </svg>
-);
-
+// ---------- ribbon motif ----------
 export const KRibbon = ({ colors = [SP.olive, SP.lime, SP.cream, SP.coral, SP.blush], h = 8, w = '100%', radius = 0, style }) => (
   <div style={{ display: 'flex', width: w, height: h, borderRadius: radius, overflow: 'hidden', ...style }}>
     {colors.map((c, i) => <div key={i} style={{ flex: 1, background: c }} />)}
