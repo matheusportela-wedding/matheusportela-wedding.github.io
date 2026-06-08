@@ -57,7 +57,8 @@ export const FlagBR = ({ w = 26 }) => (
 );
 export const FlagUS = ({ w = 26 }) => (
   <svg viewBox="0 0 28 20" width={w} height={w * 20 / 28}>
-    {Array.from({ length: 7 }).map((_, i) => <rect key={i} y={i * 2.857} width="28" height="1.43" fill="#b22234" />)}
+    <rect width="28" height="18" fill="#eee" />
+    {Array.from({ length: 7 }).map((_, i) => <rect key={i} y={i * 2.857} width="28" height="1.5" fill="#b22234" />)}
     <rect width="12" height="10" fill="#3c3b6e" />
     {Array.from({ length: 12 }).map((_, i) => <circle key={i} cx={1.5 + (i % 4) * 3} cy={2 + Math.floor(i / 4) * 3} r="0.7" fill="#fff" />)}
   </svg>
