@@ -103,6 +103,8 @@ export const Icons = {
   leaf: (p) => <Ic {...p}><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z" /><path d="M2 21c0-3 1.9-5.4 5-6" /></Ic>,
   shield: (p) => <Ic {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></Ic>,
   music: (p) => <Ic {...p}><path d="M9 18V5l11-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="17" cy="16" r="3" /></Ic>,
+  menu: (p) => <Ic {...p}><path d="M4 7h16M4 12h16M4 17h16" /></Ic>,
+  close: (p) => <Ic {...p}><path d="M6 6l12 12M18 6L6 18" /></Ic>,
 };
 
 // ---------- flags ----------
