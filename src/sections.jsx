@@ -156,7 +156,9 @@ export const EventSection = ({ L }) => {
                 </div>
               );
             })}
-            <a className="btn-outline" href="https://maps.app.goo.gl/gGVU6YEYF3VXpQzZ8" target="_blank">{E.mapBtn}</a>
+            <div className="detail__button">
+              <a className="btn-outline" href="https://maps.app.goo.gl/gGVU6YEYF3VXpQzZ8" target="_blank">{E.mapBtn}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -219,7 +221,7 @@ export const BrazilSection = ({ L }) => {
     <section id="brazil" className="section section--page">
       <div className="wrap">
         <SectionHead eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
-        <Photo src="/images/brazil.jpg" alt="Rio de Janeiro at sunset" className="brazil__photo" />
+        <Photo src="/images/brazil.png" alt="Rio de Janeiro at sunset" className="brazil__photo" />
 
         <div className="card watch">
           <div className="watch__head">
@@ -264,7 +266,7 @@ export const BrasiliaSection = ({ L }) => {
       <div className="wrap">
         <SectionHead eyebrow={C.eyebrow} title={C.title} />
         <div className="brasilia__grid">
-          <Photo src="/images/brasilia.jpg" alt="Brasília at sunset" className="brasilia__photo" />
+          <Photo src="/images/brasilia.png" alt="Brasília at sunset" className="brasilia__photo" />
           <div>
             <div className="brasilia__badge"><IconBadge><Icons.building w={26} /></IconBadge></div>
             <h3 className="brasilia__subtitle">{C.whatTitle}</h3>

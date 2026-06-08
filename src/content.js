@@ -22,7 +22,7 @@ export const I18N = {
       ceremony: { tag: 'Ceremony', time: '5 PM', desc: 'We’ll marry outdoors, in the beautiful open garden.' },
       reception: { tag: 'Reception', time: '6 PM', desc: 'Right next door for dinner, toasts, and dancing.' },
       rows: [
-        ['Location', 'Espaço Renascença\nBrasília — DF'],
+        ['Location', 'Espaço Renascença\nSetor de Mansões Park Way Quadra 13 Conj. 01 Lote 06\nBrasília, DF, Brazil'],
         ['Dress code', 'Formal — long dresses and suits. Open-air garden, so choose light, breathable fabrics.'],
         ['Weather', 'Late December is hot and humid, with a chance of a quick shower — a light layer is a sensible bet.'],
       ],
@@ -179,12 +179,12 @@ export const I18N = {
         { group: 'Padrinhos', people: [['Nome Sobrenome', 'Padrinho'], ['Nome Sobrenome', 'Padrinho'], ['Nome Sobrenome', 'Padrinho'], ['Nome Sobrenome', 'Padrinho']] },
       ],
       foot: 'Você não precisa fazer nada — mas, se vir um grupo com as mesmas cores no dia, agora você sabe quem são. (Os nomes acima são exemplos — a lista final vem em breve.)' },
-    event: { eyebrow: 'A celebração', title: 'O Evento',
+    event: { eyebrow: 'A celebração', title: 'Evento',
       intro: 'Tudo acontece em um só lugar: o Espaço Renascença, um espaço verde a poucos minutos do centro de Brasília. A cerimônia e a festa são lado a lado, então reserve a noite toda para celebrar conosco.',
       ceremony: { tag: 'Cerimônia', time: '17h', desc: 'Vamos nos casar ao ar livre, no lindo jardim aberto.' },
       reception: { tag: 'Recepção', time: '18h', desc: 'Logo ao lado, com jantar, brindes e muita dança.' },
       rows: [
-        ['Local', 'Espaço Renascença\nBrasília — DF'],
+        ['Local', 'Espaço Renascença\nSetor de Mansões Park Way Quadra 13 Conj. 01 Lote 06\nBrasília, DF, Brasil'],
         ['Traje', 'Formal — vestidos longos e ternos. Jardim ao ar livre, então prefira tecidos leves e frescos.'],
         ['Clima', 'O fim de dezembro é quente e úmido, com chance de chuva rápida — leve um casaco leve por garantia.'],
       ],
