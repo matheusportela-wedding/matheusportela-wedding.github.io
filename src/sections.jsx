@@ -83,7 +83,7 @@ export const CoupleIntro = ({ L }) => (
   <section id="nos" className="section section--couple">
     <div className="wrap">
       <div className="couple__grid">
-        <Photo label="couple portrait" className="couple__photo photo--olive" />
+        <Photo src="/images/anna-and-matheus.jpg" alt="The couple" className="couple__photo" />
         <div>
           <p className="eyebrow">{L.couple.eyebrow}</p>
           <h2 className="calli couple__title">{L.couple.title}</h2>
@@ -99,7 +99,7 @@ export const CoupleIntro = ({ L }) => (
 // ---------- WEDDING PARTY ----------
 const Person = ({ name, role }) => (
   <div className="person">
-    <Photo className="person__photo" />
+    <Photo className="person__photo photo__placeholder" />
     <div>
       <div className="person__name">{name}</div>
       <div className="person__role">{role}</div>
@@ -142,7 +142,7 @@ export const EventSection = ({ L }) => {
           ))}
         </div>
         <div className="event__detail">
-          <Photo label="espaço renascença · garden" className="event__photo photo--olive-soft" />
+          <Photo src="/images/espaco-renascenca.png" alt="The garden at Espaço Renascença" className="event__photo" />
           <div className="card event__card">
             {E.rows.map(([label, text], i) => {
               const Icon = rowIcons[i];
@@ -156,7 +156,7 @@ export const EventSection = ({ L }) => {
                 </div>
               );
             })}
-            <span className="btn-outline">{E.mapBtn}</span>
+            <a className="btn-outline" href="https://maps.app.goo.gl/gGVU6YEYF3VXpQzZ8" target="_blank">{E.mapBtn}</a>
           </div>
         </div>
       </div>
@@ -219,7 +219,7 @@ export const BrazilSection = ({ L }) => {
     <section id="brazil" className="section section--alt">
       <div className="wrap">
         <SectionHead eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
-        <Photo label={B.photo} className="brazil__photo photo--olive" />
+        <Photo label={B.photo} className="brazil__photo photo--olive photo__placeholder" />
 
         <div className="card watch">
           <div className="watch__head">
@@ -246,7 +246,7 @@ export const BrazilSection = ({ L }) => {
         <div className="trip__grid">
           {B.trip.places.map((name, i) => (
             <div key={i} className="place">
-              <Photo label={name.toLowerCase()} className="place__photo" />
+              <Photo label={name.toLowerCase()} className="place__photo photo__placeholder" />
               <div className="place__caption"><div className="place__name">{name}</div></div>
             </div>
           ))}
@@ -264,7 +264,7 @@ export const BrasiliaSection = ({ L }) => {
       <div className="wrap">
         <SectionHead eyebrow={C.eyebrow} title={C.title} />
         <div className="brasilia__grid">
-          <Photo label={C.photo} className="brasilia__photo photo--olive" />
+          <Photo label={C.photo} className="brasilia__photo photo--olive photo__placeholder" />
           <div>
             <div className="brasilia__badge"><IconBadge><Icons.building w={26} /></IconBadge></div>
             <h3 className="brasilia__subtitle">{C.whatTitle}</h3>
@@ -353,6 +353,5 @@ export const Footer = ({ L }) => (
     <div className="calli footer__name">Anna &amp; Matheus</div>
     <div className="footer__date">{L.footer.dateLine}</div>
     <Ribbon className="footer__ribbon" />
-    <div className="footer__tag">#ANNAEMATHEUS2026 · annaematheus@email.com</div>
   </footer>
 );

@@ -6,10 +6,13 @@ import React from 'react';
 // Five-colour ribbon bar. Width/placement come from the context class.
 export const Ribbon = ({ className = '' }) => <div className={`ribbon ${className}`.trim()} />;
 
-// Photo placeholder (swapped for real images later). Colour & size: context class.
-export const Photo = ({ label, className = '' }) => (
+// Photo box. Pass `src` (+ `alt`) to show a real image; otherwise it renders
+// the striped placeholder with `label`. Size/shape come from the context class.
+export const Photo = ({ src, alt = '', label, className = '' }) => (
   <div className={`photo ${className}`.trim()}>
-    {label ? <span className="photo__label">{label}</span> : null}
+    {src
+      ? <img className="photo__img" src={src} alt={alt} />
+      : (label ? <span className="photo__label">{label}</span> : null)}
   </div>
 );
 
