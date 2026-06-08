@@ -4,18 +4,19 @@ import { CT } from './themes.js';
 import { I18N } from './content.js';
 import {
   Nav, Hero, CoupleIntro, WeddingPartySection, EventSection,
-  TravelSection, NewYearSection, CitySection, RsvpSection,
+  TravelSection, BrazilSection, BrasiliaSection, RsvpSection,
   RegistrySection, Footer, Switcher,
 } from './sections.jsx';
 
 const PAGES = {
   inicio: (t, L) => <React.Fragment><Hero t={t} L={L} /><CoupleIntro t={t} L={L} /></React.Fragment>,
-  evento: (t, L) => <EventSection t={t} L={L} />,
   padrinhos: (t, L) => <WeddingPartySection t={t} L={L} />,
-  viagem: (t, L) => <React.Fragment><TravelSection t={t} L={L} /><NewYearSection t={t} L={L} /></React.Fragment>,
-  cidade: (t, L) => <CitySection t={t} L={L} />,
-  rsvp: (t, L) => <RsvpSection t={t} L={L} />,
+  evento: (t, L) => <EventSection t={t} L={L} />,
+  viagem: (t, L) => <TravelSection t={t} L={L} />,
+  brazil: (t, L) => <BrazilSection t={t} L={L} />,
+  brasilia: (t, L) => <BrasiliaSection t={t} L={L} />,
   presentes: (t, L) => <RegistrySection t={t} L={L} />,
+  rsvp: (t, L) => <RsvpSection t={t} L={L} />,
 };
 
 export const Site = () => {

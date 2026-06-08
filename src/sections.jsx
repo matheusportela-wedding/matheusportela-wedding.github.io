@@ -7,7 +7,7 @@ import { CT } from './themes.js';
 
 // ---------- NAV ----------
 export const Nav = ({ t, L, tab, setTab, lang, setLang }) => {
-  const tabs = ['inicio', 'evento', 'padrinhos', 'viagem', 'cidade', 'rsvp', 'presentes'];
+  const tabs = ['inicio', 'padrinhos', 'evento', 'viagem', 'brazil', 'brasilia', 'presentes'];
   const FlagBtn = ({ code, Flag }) => (
     <button onClick={() => setLang(code)} title={code === 'pt' ? 'Português' : 'English'} style={{
       background: 'none', border: 'none', cursor: 'pointer', padding: 2, lineHeight: 0, borderRadius: 4,
@@ -118,6 +118,7 @@ export const WeddingPartySection = ({ t, L }) => (
           </div>
         </div>
       ))}
+      {L.party.foot && <Txt t={t} size={15.5} style={{ textAlign: 'center', maxWidth: 760, margin: '44px auto 0', fontStyle: 'italic' }}>{L.party.foot}</Txt>}
     </Wrap>
   </Section>
 );
@@ -195,88 +196,97 @@ export const TravelSection = ({ t, L }) => {
   );
 };
 
-// ---------- NEW YEAR FEATURE ----------
-export const NewYearSection = ({ t, L }) => {
-  const N = L.newyear;
+// ---------- BRAZIL (travel guide) ----------
+const InfoCard = ({ t, s, Icon }) => (
+  <Card t={t} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+      <IconBadge t={t}><Icon w={24} /></IconBadge>
+      <div style={{ fontFamily: t.body, fontSize: 23, color: t.ink, lineHeight: 1.1 }}>{s.title}</div>
+    </div>
+    {s.lead && <Txt t={t} size={15.5}>{s.lead}</Txt>}
+    <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9 }}>
+      {s.items.map(([bold, rest], j) => (
+        <li key={j} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: t.ribbon[j % t.ribbon.length], marginTop: 9, flex: '0 0 auto' }} />
+          <Txt t={t} size={14.5} style={{ lineHeight: 1.6 }}>{bold && <strong style={{ color: t.ink, fontWeight: 600 }}>{bold} </strong>}{rest}</Txt>
+        </li>
+      ))}
+    </ul>
+    {s.foot && <Txt t={t} size={14.5} style={{ fontStyle: 'italic', marginTop: 2 }}>{s.foot}</Txt>}
+  </Card>
+);
+export const BrazilSection = ({ t, L }) => {
+  const B = L.brazil;
+  const iconMap = { wifi: Icons.wifi, chat: Icons.chat, money: Icons.money, sun: Icons.sun, leaf: Icons.leaf, shield: Icons.shield, fireworks: Icons.fireworks, fork: Icons.fork, music: Icons.music };
   return (
-    <Section id="reveillon" bg={t.feature} pad="100px 0">
+    <Section id="brazil" bg={t.alt}>
       <Wrap>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, alignItems: 'center' }}>
-          <div>
-            <Eye t={t} color={t.featureAccent}>{N.eyebrow}</Eye>
-            <Calli size={96} color={t.featureFg} style={{ margin: '4px 0 18px' }}>{N.title}</Calli>
-            <Txt t={t} size={18} color={`${t.featureFg}dd`}>{N.p[0]}<em>{N.p[1]}</em>{N.p[2]}</Txt>
-            <div style={{ marginTop: 22, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {N.places.map(([place, desc], i) => (
-                <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                  <span style={{ marginTop: 2 }}><Icons.fireworks w={22} stroke={t.featureAccent} /></span>
-                  <div>
-                    <div style={{ fontFamily: t.body, fontSize: 18, color: t.featureFg }}>{place}</div>
-                    <Txt t={t} size={15} color={`${t.featureFg}bb`}>{desc}</Txt>
-                  </div>
-                </div>
-              ))}
-            </div>
+        <SectionHead t={t} eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
+        <Photo label={B.photo} h={300} bg={SP.olive} radius={2} style={{ marginBottom: 28 }} />
+
+        {/* Watch before you come */}
+        <Card t={t} style={{ marginBottom: 28 }}>
+          <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 12 }}>
+            <IconBadge t={t}><Icons.play w={24} /></IconBadge>
+            <div style={{ fontFamily: t.body, fontSize: 23, color: t.ink }}>{B.watch.title}</div>
           </div>
-          <Photo label={N.photo} h={460} bg={t.motif === 'palm' ? SP.coralDeep : SP.oliveDeep} radius={2} />
+          <Txt t={t} size={15.5}>{B.watch.lead}</Txt>
+          <ul style={{ margin: '14px 0 0', padding: 0, listStyle: 'none', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '9px 28px' }}>
+            {B.watch.videos.map(([label, url], i) => (
+              <li key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: t.ribbon[i % t.ribbon.length], marginTop: 9, flex: '0 0 auto' }} />
+                <a href={url} target="_blank" rel="noreferrer" style={{ fontFamily: t.body, fontSize: 15, lineHeight: 1.5, color: t.accentDeep, textDecoration: 'none', borderBottom: `1px solid ${t.accentDeep}55` }}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        {/* Practical guide */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 60 }}>
+          {B.info.map((s, i) => <InfoCard key={i} t={t} s={s} Icon={iconMap[s.icon] || Icons.star} />)}
+        </div>
+
+        {/* Make it a trip */}
+        <div style={{ textAlign: 'center', marginBottom: 10 }}><Eye t={t}>{B.trip.title}</Eye></div>
+        <Txt t={t} size={17} style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 26px' }}>{B.trip.lead}</Txt>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
+          {B.trip.places.map((name, i) => (
+            <div key={i} style={{ position: 'relative', overflow: 'hidden', border: `1px solid ${t.line}` }}>
+              <Photo label={name.toLowerCase()} h={140} bg={[SP.olive, SP.coralDeep, SP.oliveSoft][i % 3]} radius={0} />
+              <div style={{ padding: '12px 16px', background: t.card }}>
+                <div style={{ fontFamily: t.body, fontSize: 17, color: t.ink, lineHeight: 1.15 }}>{name}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </Wrap>
     </Section>
   );
 };
 
-// ---------- CITY ----------
-export const CitySection = ({ t, L }) => {
-  const C = L.city;
+// ---------- BRASÍLIA (the city) ----------
+export const BrasiliaSection = ({ t, L }) => {
+  const C = L.brasilia;
   return (
-    <Section id="cidade" bg={t.page}>
+    <Section id="brasilia" bg={t.page}>
       <Wrap>
-        <SectionHead t={t} eyebrow={C.eyebrow} title={C.title} intro={C.intro} />
+        <SectionHead t={t} eyebrow={C.eyebrow} title={C.title} />
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center', marginBottom: 56 }}>
-          <Photo label={C.photo} h={360} bg={SP.olive} radius={2} />
+          <Photo label={C.photo} h={380} bg={SP.olive} radius={2} />
           <div>
             <div style={{ display: 'flex', gap: 12, marginBottom: 14 }}><IconBadge t={t}><Icons.building w={26} /></IconBadge></div>
             <div style={{ fontFamily: t.body, fontSize: 28, color: t.ink, marginBottom: 10 }}>{C.whatTitle}</div>
-            <Txt t={t}>{C.whatP}</Txt>
+            <Txt t={t}>{C.intro}</Txt>
             <div style={{ marginTop: 18 }}><KRibbon colors={t.ribbon} w={150} h={6} radius={3} /></div>
           </div>
         </div>
 
         <div style={{ marginBottom: 18, textAlign: 'center' }}><Eye t={t}>{C.seeLabel}</Eye></div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 18, marginBottom: 56 }}>
-          {C.sights.map(([name, note], i) => (
-            <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'center', background: t.alt, padding: '18px 20px', border: `1px solid ${t.line}` }}>
-              <span style={{ color: t.accentDeep }}><Icons.pin w={22} /></span>
-              <div>
-                <div style={{ fontFamily: t.body, fontSize: 18, color: t.ink, lineHeight: 1.15 }}>{name}</div>
-                <Txt t={t} size={14}>{note}</Txt>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, marginBottom: 56 }}>
-          <Card t={t}>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}><IconBadge t={t}><Icons.fork w={26} /></IconBadge></div>
-            <div style={{ fontFamily: t.body, fontSize: 23, color: t.ink, marginBottom: 8 }}>{C.foodTitle}</div>
-            <Txt t={t} size={16}>{C.foodP}</Txt>
-          </Card>
-          <Card t={t}>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}><IconBadge t={t}><Icons.globe w={26} /></IconBadge></div>
-            <div style={{ fontFamily: t.body, fontSize: 23, color: t.ink, marginBottom: 8 }}>{C.tripTitle}</div>
-            <Txt t={t} size={16}>{C.tripP}</Txt>
-          </Card>
-        </div>
-
-        <div style={{ marginBottom: 18, textAlign: 'center' }}><Eye t={t}>{C.beyondLabel}</Eye></div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
-          {C.brazil.map(([name, note], i) => (
-            <div key={i} style={{ position: 'relative', overflow: 'hidden', border: `1px solid ${t.line}` }}>
-              <Photo label={name.toLowerCase()} h={150} bg={[SP.olive, SP.coralDeep, SP.oliveSoft][i % 3]} radius={0} />
-              <div style={{ padding: '14px 18px', background: t.card }}>
-                <div style={{ fontFamily: t.body, fontSize: 18, color: t.ink, lineHeight: 1.15 }}>{name}</div>
-                <Txt t={t} size={14}>{note}</Txt>
-              </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14 }}>
+          {C.sights.map((name, i) => (
+            <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'center', background: t.alt, padding: '14px 18px', border: `1px solid ${t.line}` }}>
+              <span style={{ color: t.accentDeep, flex: '0 0 auto' }}><Icons.pin w={20} /></span>
+              <div style={{ fontFamily: t.body, fontSize: 16.5, color: t.ink, lineHeight: 1.15 }}>{name}</div>
             </div>
           ))}
         </div>
@@ -298,6 +308,16 @@ export const RsvpSection = ({ t, L }) => {
     <Section id="rsvp" bg={t.alt}>
       <Wrap w={680}>
         <SectionHead t={t} eyebrow={R.eyebrow} title={R.title} intro={R.intro} />
+        {R.notes && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
+            {R.notes.map(([label, text], i) => (
+              <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                <span style={{ marginTop: 2 }}><Icons.heart w={22} stroke={t.accentDeep} /></span>
+                <Txt t={t} size={16}><strong style={{ color: t.ink, fontWeight: 600 }}>{label}.</strong> {text}</Txt>
+              </div>
+            ))}
+          </div>
+        )}
         <Card t={t} style={{ padding: '40px 40px', display: 'flex', flexDirection: 'column', gap: 16 }}>
           <Field t={t} label={R.name} ph={R.namePh} />
           <Field t={t} label={R.email} ph={R.emailPh} />
@@ -308,6 +328,7 @@ export const RsvpSection = ({ t, L }) => {
           <Field t={t} label={R.note} ph={R.notePh} h={90} />
           <div style={{ height: 56, background: t.accent, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: t.body, fontSize: 16, letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: 4, cursor: 'pointer' }}>{R.submit}</div>
         </Card>
+        {R.foot && <Txt t={t} size={15.5} style={{ textAlign: 'center', marginTop: 24, fontStyle: 'italic' }}>{R.foot}</Txt>}
       </Wrap>
     </Section>
   );
