@@ -107,7 +107,7 @@ const Person = ({ name, role }) => (
   </div>
 );
 export const WeddingPartySection = ({ L }) => (
-  <section id="padrinhos" className="section section--page">
+  <section id="padrinhos" className="section section--alt">
     <div className="wrap">
       <SectionHead eyebrow={L.party.eyebrow} title={L.party.title} intro={L.party.intro} />
       {L.party.groups.map((g, gi) => (
@@ -142,7 +142,7 @@ export const EventSection = ({ L }) => {
           ))}
         </div>
         <div className="event__detail">
-          <Photo src="/images/espaco-renascenca.png" alt="The garden at Espaço Renascença" className="event__photo" />
+          <Photo src="/images/espaco-renascenca.jpg" alt="The garden at Espaço Renascença" className="event__photo" />
           <div className="card event__card">
             {E.rows.map(([label, text], i) => {
               const Icon = rowIcons[i];
@@ -168,7 +168,7 @@ export const EventSection = ({ L }) => {
 export const TravelSection = ({ L }) => {
   const icons = [Icons.plane, Icons.car, Icons.bed, Icons.money, Icons.passport, Icons.calendar];
   return (
-    <section id="viagem" className="section section--alt">
+    <section id="viagem" className="section section--page">
       <div className="wrap">
         <SectionHead eyebrow={L.travel.eyebrow} title={L.travel.title} intro={L.travel.intro} />
         <div className="cards-3">
@@ -216,10 +216,10 @@ export const BrazilSection = ({ L }) => {
   const B = L.brazil;
   const iconMap = { wifi: Icons.wifi, chat: Icons.chat, money: Icons.money, sun: Icons.sun, leaf: Icons.leaf, shield: Icons.shield, fireworks: Icons.fireworks, fork: Icons.fork, music: Icons.music };
   return (
-    <section id="brazil" className="section section--alt">
+    <section id="brazil" className="section section--page">
       <div className="wrap">
         <SectionHead eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
-        <Photo label={B.photo} className="brazil__photo photo--olive photo__placeholder" />
+        <Photo src="/images/brazil.jpg" alt="Rio de Janeiro at sunset" className="brazil__photo" />
 
         <div className="card watch">
           <div className="watch__head">
@@ -260,11 +260,11 @@ export const BrazilSection = ({ L }) => {
 export const BrasiliaSection = ({ L }) => {
   const C = L.brasilia;
   return (
-    <section id="brasilia" className="section section--page">
+    <section id="brasilia" className="section section--alt">
       <div className="wrap">
         <SectionHead eyebrow={C.eyebrow} title={C.title} />
         <div className="brasilia__grid">
-          <Photo label={C.photo} className="brasilia__photo photo--olive photo__placeholder" />
+          <Photo src="/images/brasilia.jpg" alt="Brasília at sunset" className="brasilia__photo" />
           <div>
             <div className="brasilia__badge"><IconBadge><Icons.building w={26} /></IconBadge></div>
             <h3 className="brasilia__subtitle">{C.whatTitle}</h3>
@@ -297,7 +297,7 @@ const Field = ({ label, ph, tall }) => (
 export const RsvpSection = ({ L }) => {
   const R = L.rsvp;
   return (
-    <section id="rsvp" className="section section--alt">
+    <section id="rsvp" className="section section--page">
       <div className="wrap wrap--narrow">
         <SectionHead eyebrow={R.eyebrow} title={R.title} intro={R.intro} />
         {R.notes && (
@@ -328,7 +328,7 @@ export const RsvpSection = ({ L }) => {
 
 // ---------- REGISTRY ----------
 export const RegistrySection = ({ L }) => (
-  <section id="presentes" className="section section--page">
+  <section id="presentes" className="section section--alt">
     <div className="wrap wrap--mid">
       <SectionHead eyebrow={L.registry.eyebrow} title={L.registry.title} intro={L.registry.intro} />
       <div className="gifts">
