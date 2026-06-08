@@ -29,8 +29,8 @@ export const Nav = ({ t, L, tab, setTab, lang, setLang }) => {
       <FlagBtn code="en" Flag={FlagUS} />
     </div>
   );
-  const Cta = () => (
-    <button onClick={() => go('rsvp')} style={{ border: 'none', cursor: 'pointer', fontFamily: t.body, fontSize: 12.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: t.accent, padding: '10px 18px', borderRadius: 2, whiteSpace: 'nowrap' }}>{L.nav.confirmar}</button>
+  const Cta = ({ block }) => (
+    <button onClick={() => go('rsvp')} style={{ border: 'none', cursor: 'pointer', fontFamily: t.body, fontSize: 12.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: t.accent, padding: '12px 18px', borderRadius: 2, whiteSpace: 'nowrap', width: block ? '100%' : 'auto' }}>{L.nav.confirmar}</button>
   );
   const tabStyle = (active, block) => ({
     background: 'none', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
@@ -52,19 +52,19 @@ export const Nav = ({ t, L, tab, setTab, lang, setLang }) => {
           </div>
         )}
         {isCompact && (
-          <button onClick={() => setOpen((o) => !o)} aria-label="Menu" style={{ background: 'none', border: 'none', cursor: 'pointer', color: t.navFg, padding: 6, flex: '0 0 auto', display: 'flex' }}>
-            {open ? <Icons.close w={26} stroke={t.navFg} /> : <Icons.menu w={26} stroke={t.navFg} />}
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: '0 0 auto' }}>
+            <Flags />
+            <button onClick={() => setOpen((o) => !o)} aria-label="Menu" style={{ background: 'none', border: 'none', cursor: 'pointer', color: t.navFg, padding: 6, display: 'flex' }}>
+              {open ? <Icons.close w={26} stroke={t.navFg} /> : <Icons.menu w={26} stroke={t.navFg} />}
+            </button>
+          </div>
         )}
       </Wrap>
       {isCompact && open && (
         <div style={{ borderTop: '1px solid rgba(120,120,120,0.2)' }}>
           <Wrap w={1300} style={{ display: 'flex', flexDirection: 'column', paddingTop: 6, paddingBottom: 18 }}>
             {tabs.map((key) => <button key={key} onClick={() => go(key)} style={tabStyle(tab === key, true)}>{L.nav[key]}</button>)}
-            <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-              <Cta />
-              <Flags />
-            </div>
+            <div style={{ marginTop: 16 }}><Cta block /></div>
           </Wrap>
         </div>
       )}
@@ -371,7 +371,7 @@ export const RegistrySection = ({ t, L }) => (
   <Section id="presentes" bg={t.page}>
     <Wrap w={1000}>
       <SectionHead t={t} eyebrow={L.registry.eyebrow} title={L.registry.title} intro={L.registry.intro} />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: COLS(260), gap: 24 }}>
         {L.registry.ways.map(([name, who, line, handle], i) => (
           <Card key={i} t={t} style={{ textAlign: 'center', padding: '34px 26px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
             <IconBadge t={t}><Icons.heart w={24} /></IconBadge>
