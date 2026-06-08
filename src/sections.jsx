@@ -1,387 +1,358 @@
 // sections.jsx — the page sections of the wedding site. Each takes the active
-// theme `t` and the active language dictionary `L` (from content.js).
+// language dictionary `L` (from content.js). All styling lives in styles.css.
 import React, { useState } from 'react';
-import { SP, KRibbon, Photo, Icons, FlagBR, FlagUS } from './kit.jsx';
-import { Wrap, Eye, Calli, Txt, SectionHead, IconBadge, Card, Section } from './primitives.jsx';
-import { useViewport } from './useViewport.js';
-
-// Responsive column helper: as many equal columns as fit, collapsing to a single
-// column on narrow screens without ever overflowing (the min() guard).
-const COLS = (min) => `repeat(auto-fit, minmax(min(100%, ${min}px), 1fr))`;
+import { Ribbon, Photo, Icons, FlagBR, FlagUS } from './kit.jsx';
+import { IconBadge, SectionHead } from './primitives.jsx';
 
 // ---------- NAV ----------
-export const Nav = ({ t, L, tab, setTab, lang, setLang }) => {
+export const Nav = ({ L, tab, setTab, lang, setLang }) => {
   const tabs = ['inicio', 'evento', 'padrinhos', 'viagem', 'brasilia', 'brazil', 'presentes'];
-  const { isCompact } = useViewport();
   const [open, setOpen] = useState(false);
   const go = (key) => { setTab(key); setOpen(false); };
 
-  const FlagBtn = ({ code, Flag }) => (
-    <button onClick={() => setLang(code)} title={code === 'pt' ? 'Português' : 'English'} style={{
-      background: 'none', border: 'none', cursor: 'pointer', padding: 2, lineHeight: 0, borderRadius: 4,
-      opacity: lang === code ? 1 : 0.4, boxShadow: lang === code ? `0 0 0 2px ${t.accent}` : 'none',
-    }}><Flag w={24} /></button>
-  );
   const Flags = () => (
-    <div style={{ display: 'flex', gap: 6, alignItems: 'center', paddingLeft: 6, borderLeft: `1px solid ${t.navFg}33`, marginLeft: 2 }}>
-      <FlagBtn code="pt" Flag={FlagBR} />
-      <FlagBtn code="en" Flag={FlagUS} />
+    <div className="nav__flags">
+      {[['pt', FlagBR, 'Português'], ['en', FlagUS, 'English']].map(([code, Flag, title]) => (
+        <button key={code} className={'flag' + (lang === code ? ' flag--active' : '')} title={title} onClick={() => setLang(code)}>
+          <Flag w={24} />
+        </button>
+      ))}
     </div>
   );
-  const Cta = ({ block }) => (
-    <button onClick={() => go('rsvp')} style={{ border: 'none', cursor: 'pointer', fontFamily: t.body, fontSize: 12.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#fff', background: t.accent, padding: '12px 18px', borderRadius: 2, whiteSpace: 'nowrap', width: block ? '100%' : 'auto' }}>{L.nav.confirmar}</button>
-  );
-  const tabStyle = (active, block) => ({
-    background: 'none', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
-    fontFamily: t.body, letterSpacing: '0.12em', textTransform: 'uppercase', color: t.navFg,
-    opacity: active ? 1 : 0.78, fontSize: block ? 16 : 13,
-    padding: block ? '13px 2px' : '4px 0', width: block ? '100%' : 'auto', textAlign: block ? 'left' : 'center',
-    borderBottom: block ? '1px solid rgba(120,120,120,0.18)' : `2px solid ${active ? t.accent : 'transparent'}`,
-  });
 
   return (
-    <div style={{ position: 'sticky', top: 0, zIndex: 50, background: t.navBg, backdropFilter: 'blur(8px)', borderBottom: `1px solid ${t.navBorder}` }}>
-      <Wrap w={1300} style={{ height: 70, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 18 }}>
-        <button onClick={() => go('inicio')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginRight: 4, flex: '0 0 auto' }}><Calli size={36} color={t.navFg}>A&amp;M</Calli></button>
-        {!isCompact && (
-          <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
-            {tabs.map((key) => <button key={key} onClick={() => go(key)} style={tabStyle(tab === key, false)}>{L.nav[key]}</button>)}
-            <Cta />
-            <Flags />
-          </div>
-        )}
-        {isCompact && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: '0 0 auto' }}>
-            <Flags />
-            <button onClick={() => setOpen((o) => !o)} aria-label="Menu" style={{ background: 'none', border: 'none', cursor: 'pointer', color: t.navFg, padding: 6, display: 'flex' }}>
-              {open ? <Icons.close w={26} stroke={t.navFg} /> : <Icons.menu w={26} stroke={t.navFg} />}
-            </button>
-          </div>
-        )}
-      </Wrap>
-      {isCompact && open && (
-        <div style={{ borderTop: '1px solid rgba(120,120,120,0.2)' }}>
-          <Wrap w={1300} style={{ display: 'flex', flexDirection: 'column', paddingTop: 6, paddingBottom: 18 }}>
-            {tabs.map((key) => <button key={key} onClick={() => go(key)} style={tabStyle(tab === key, true)}>{L.nav[key]}</button>)}
-            <div style={{ marginTop: 16 }}><Cta block /></div>
-          </Wrap>
+    <header className="nav">
+      <div className="nav__bar wrap wrap--wide">
+        <button className="nav__logo calli" onClick={() => go('inicio')}>A&amp;M</button>
+
+        <nav className="nav__links">
+          {tabs.map((key) => (
+            <button key={key} className={'nav__link' + (tab === key ? ' is-active' : '')} onClick={() => go(key)}>{L.nav[key]}</button>
+          ))}
+          <button className="nav__cta" onClick={() => go('rsvp')}>{L.nav.confirmar}</button>
+          <Flags />
+        </nav>
+
+        <div className="nav__compact">
+          <Flags />
+          <button className="nav__toggle" aria-label="Menu" onClick={() => setOpen((o) => !o)}>
+            {open ? <Icons.close w={26} /> : <Icons.menu w={26} />}
+          </button>
         </div>
-      )}
-    </div>
+      </div>
+
+      <div className={'nav__menu' + (open ? ' is-open' : '')}>
+        <div className="nav__menu-inner wrap wrap--wide">
+          {tabs.map((key) => (
+            <button key={key} className={'nav__menu-link' + (tab === key ? ' is-active' : '')} onClick={() => go(key)}>{L.nav[key]}</button>
+          ))}
+          <div className="nav__menu-cta"><button className="nav__cta nav__cta--block" onClick={() => go('rsvp')}>{L.nav.confirmar}</button></div>
+        </div>
+      </div>
+    </header>
   );
 };
 
 // ---------- HERO ----------
-export const Hero = ({ t, L }) => {
+export const Hero = ({ L }) => {
   const icons = [Icons.calendar, Icons.clock, Icons.pin];
   return (
-    <section id="inicio" style={{ position: 'relative', minHeight: 620, background: t.heroBg, color: t.heroFg, overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
-      <Wrap style={{ position: 'relative', textAlign: 'center', width: '100%' }}>
-        <Eye t={t} color="rgba(255,255,255,0.85)">{L.hero.eyebrow}</Eye>
-        <Calli size={'clamp(54px, 15vw, 172px)'} color={t.heroFg} style={{ margin: '2px 0 0' }}>Anna <span style={{ color: t.accent }}>&amp;</span> Matheus</Calli>
-        <Txt t={t} size={20} color="rgba(255,255,255,0.92)" style={{ fontStyle: 'italic', marginTop: 6 }}>{L.hero.dateItalic}</Txt>
-        <div style={{ display: 'flex', gap: 14, justifyContent: 'center', marginTop: 30, flexWrap: 'wrap' }}>
+    <section id="inicio" className="hero">
+      <div className="hero__inner wrap">
+        <p className="eyebrow hero__eyebrow">{L.hero.eyebrow}</p>
+        <h1 className="calli hero__name">Anna <span className="amp">&amp;</span> Matheus</h1>
+        <p className="lead hero__date">{L.hero.dateItalic}</p>
+        <div className="chips">
           {L.hero.chips.map((label, i) => {
             const Icon = icons[i];
             return (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 18px', borderRadius: 40, border: '1px solid rgba(255,255,255,0.3)', color: t.heroFg }}>
-                <Icon w={18} stroke={t.heroAccent} /><span style={{ fontFamily: t.body, fontSize: 15.5, letterSpacing: '0.04em' }}>{label}</span>
+              <div key={i} className="chip">
+                <Icon w={18} /><span className="chip__text">{label}</span>
               </div>
             );
           })}
         </div>
-      </Wrap>
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}><KRibbon colors={t.ribbon} h={12} /></div>
+      </div>
+      <Ribbon className="hero__ribbon" />
     </section>
   );
 };
 
 // ---------- COUPLE PORTRAIT (home) ----------
-export const CoupleIntro = ({ t, L }) => (
-  <Section id="nos" bg={t.page} pad="96px 0">
-    <Wrap>
-      <div style={{ display: 'grid', gridTemplateColumns: COLS(340), gap: 'clamp(28px, 5vw, 60px)', alignItems: 'center' }}>
-        <Photo label="couple portrait" h={540} bg={SP.olive} radius={2} />
+export const CoupleIntro = ({ L }) => (
+  <section id="nos" className="section section--couple">
+    <div className="wrap">
+      <div className="couple__grid">
+        <Photo label="couple portrait" className="couple__photo photo--olive" />
         <div>
-          <Eye t={t}>{L.couple.eyebrow}</Eye>
-          <Calli size={'clamp(46px, 9vw, 94px)'} color={t.ink} style={{ margin: '4px 0 16px' }}>{L.couple.title}</Calli>
-          <Txt t={t}>{L.couple.p1}</Txt>
-          <Txt t={t} style={{ marginTop: 14 }}>{L.couple.p2}</Txt>
-          <div style={{ marginTop: 22 }}><KRibbon colors={t.ribbon} w={160} h={6} radius={3} /></div>
+          <p className="eyebrow">{L.couple.eyebrow}</p>
+          <h2 className="calli couple__title">{L.couple.title}</h2>
+          <p className="lead">{L.couple.p1}</p>
+          <p className="lead">{L.couple.p2}</p>
+          <Ribbon className="couple__ribbon" />
         </div>
       </div>
-    </Wrap>
-  </Section>
+    </div>
+  </section>
 );
 
 // ---------- WEDDING PARTY ----------
-const Person = ({ t, name, role, i }) => (
-  <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-    <div style={{ position: 'relative' }}>
-      <Photo label="" w={156} h={156} bg={[SP.olive, SP.oliveSoft, SP.coralDeep][i % 3]} radius={78} />
-      <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: `inset 0 0 0 1px ${t.line}` }} />
-    </div>
+const Person = ({ name, role }) => (
+  <div className="person">
+    <Photo className="person__photo" />
     <div>
-      <div style={{ fontFamily: t.body, fontSize: 20, color: t.ink, lineHeight: 1.2, whiteSpace: 'nowrap' }}>{name}</div>
-      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: t.accentDeep, marginTop: 5 }}>{role}</div>
+      <div className="person__name">{name}</div>
+      <div className="person__role">{role}</div>
     </div>
   </div>
 );
-export const WeddingPartySection = ({ t, L }) => (
-  <Section id="padrinhos" bg={t.page}>
-    <Wrap>
-      <SectionHead t={t} eyebrow={L.party.eyebrow} title={L.party.title} intro={L.party.intro} />
+export const WeddingPartySection = ({ L }) => (
+  <section id="padrinhos" className="section section--page">
+    <div className="wrap">
+      <SectionHead eyebrow={L.party.eyebrow} title={L.party.title} intro={L.party.intro} />
       {L.party.groups.map((g, gi) => (
-        <div key={gi} style={{ marginBottom: gi === L.party.groups.length - 1 ? 0 : 52 }}>
-          <div style={{ textAlign: 'center', marginBottom: 26 }}><Eye t={t}>{g.group}</Eye></div>
-          <div style={{ display: 'grid', gridTemplateColumns: COLS(150), gap: 30, justifyItems: 'center', maxWidth: g.people.length <= 2 ? 560 : '100%', margin: '0 auto' }}>
-            {g.people.map(([name, role], i) => <Person key={i} t={t} name={name} role={role} i={i} />)}
+        <div key={gi} className="group">
+          <div className="group__label"><p className="eyebrow">{g.group}</p></div>
+          <div className={'people-grid' + (g.people.length <= 2 ? ' people-grid--small' : '')}>
+            {g.people.map(([name, role], i) => <Person key={i} name={name} role={role} />)}
           </div>
         </div>
       ))}
-      {L.party.foot && <Txt t={t} size={15.5} style={{ textAlign: 'center', maxWidth: 760, margin: '44px auto 0', fontStyle: 'italic' }}>{L.party.foot}</Txt>}
-    </Wrap>
-  </Section>
+      {L.party.foot && <p className="lead party__foot">{L.party.foot}</p>}
+    </div>
+  </section>
 );
 
 // ---------- EVENT ----------
-export const EventSection = ({ t, L }) => {
+export const EventSection = ({ L }) => {
   const E = L.event;
   const rowIcons = [Icons.pin, Icons.fork, Icons.sun];
   return (
-    <Section id="evento" bg={t.page}>
-      <Wrap>
-        <SectionHead t={t} eyebrow={E.eyebrow} title={E.title} intro={E.intro} />
-        <div style={{ display: 'grid', gridTemplateColumns: COLS(280), gap: 28, marginBottom: 28 }}>
+    <section id="evento" className="section section--page">
+      <div className="wrap">
+        <SectionHead eyebrow={E.eyebrow} title={E.title} intro={E.intro} />
+        <div className="event__times">
           {[[E.ceremony, Icons.ring], [E.reception, Icons.star]].map(([c, Icon], i) => (
-            <Card key={i} t={t} style={{ textAlign: 'center', padding: '40px 34px' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}><IconBadge t={t}><Icon w={26} /></IconBadge></div>
-              <Eye t={t}>{c.tag}</Eye>
-              <Calli size={'clamp(48px, 10vw, 68px)'} color={t.accentDeep} style={{ margin: '4px 0 12px' }}>{c.time}</Calli>
-              <Txt t={t} size={16.5}>{c.desc}</Txt>
-            </Card>
+            <div key={i} className="card timecard">
+              <div className="timecard__badge"><IconBadge><Icon w={26} /></IconBadge></div>
+              <p className="eyebrow">{c.tag}</p>
+              <div className="calli timecard__time">{c.time}</div>
+              <p className="lead timecard__desc">{c.desc}</p>
+            </div>
           ))}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: COLS(320), gap: 28, alignItems: 'stretch' }}>
-          <Photo label="espaço renascença · garden" h={340} bg={SP.oliveSoft} radius={2} style={{ minHeight: 280, height: '100%' }} />
-          <Card t={t} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 18 }}>
+        <div className="event__detail">
+          <Photo label="espaço renascença · garden" className="event__photo photo--olive-soft" />
+          <div className="card event__card">
             {E.rows.map(([label, text], i) => {
               const Icon = rowIcons[i];
               return (
-                <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                  <IconBadge t={t}><Icon w={24} /></IconBadge>
+                <div key={i} className="detail-row">
+                  <IconBadge><Icon w={24} /></IconBadge>
                   <div>
-                    <div style={{ fontFamily: t.body, fontSize: 13, letterSpacing: '0.16em', textTransform: 'uppercase', color: t.accentDeep, marginBottom: 2 }}>{label}</div>
-                    <Txt t={t} size={16} style={{ whiteSpace: 'pre-line' }}>{text}</Txt>
+                    <div className="detail-row__label">{label}</div>
+                    <p className="lead detail-row__text">{text}</p>
                   </div>
                 </div>
               );
             })}
-            <span style={{ alignSelf: 'flex-start', marginTop: 4, fontFamily: t.body, fontSize: 13.5, letterSpacing: '0.14em', textTransform: 'uppercase', color: t.ink, border: `1px solid ${t.ink}`, padding: '10px 22px', cursor: 'pointer' }}>{E.mapBtn}</span>
-          </Card>
+            <span className="btn-outline">{E.mapBtn}</span>
+          </div>
         </div>
-      </Wrap>
-    </Section>
+      </div>
+    </section>
   );
 };
 
 // ---------- TRAVEL ----------
-export const TravelSection = ({ t, L }) => {
+export const TravelSection = ({ L }) => {
   const icons = [Icons.plane, Icons.car, Icons.bed, Icons.money, Icons.passport, Icons.calendar];
   return (
-    <Section id="viagem" bg={t.alt}>
-      <Wrap>
-        <SectionHead t={t} eyebrow={L.travel.eyebrow} title={L.travel.title} intro={L.travel.intro} />
-        <div style={{ display: 'grid', gridTemplateColumns: COLS(270), gap: 24 }}>
+    <section id="viagem" className="section section--alt">
+      <div className="wrap">
+        <SectionHead eyebrow={L.travel.eyebrow} title={L.travel.title} intro={L.travel.intro} />
+        <div className="cards-3">
           {L.travel.cards.map(([title, lead, items], i) => {
             const Icon = icons[i];
             return (
-              <Card key={i} t={t} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                <IconBadge t={t}><Icon w={26} /></IconBadge>
-                <div style={{ fontFamily: t.body, fontSize: 24, color: t.ink, lineHeight: 1.15 }}>{title}</div>
-                <Txt t={t} size={15.5}>{lead}</Txt>
-                <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9 }}>
+              <div key={i} className="card travel-card">
+                <IconBadge><Icon w={26} /></IconBadge>
+                <h3 className="travel-card__title">{title}</h3>
+                <p className="lead travel-card__lead">{lead}</p>
+                <ul className="bullets">
                   {items.map((it, j) => (
-                    <li key={j} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: t.ribbon[j % t.ribbon.length], marginTop: 9, flex: '0 0 auto' }} />
-                      <Txt t={t} size={14.5} style={{ lineHeight: 1.6 }}>{it}</Txt>
-                    </li>
+                    <li key={j} className="bullet"><span className="bullet__dot" /><span className="bullet__text">{it}</span></li>
                   ))}
                 </ul>
-              </Card>
+              </div>
             );
           })}
         </div>
-      </Wrap>
-    </Section>
+      </div>
+    </section>
   );
 };
 
 // ---------- BRAZIL (travel guide) ----------
-const InfoCard = ({ t, s, Icon }) => (
-  <Card t={t} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-    <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-      <IconBadge t={t}><Icon w={24} /></IconBadge>
-      <div style={{ fontFamily: t.body, fontSize: 23, color: t.ink, lineHeight: 1.1 }}>{s.title}</div>
+const InfoCard = ({ s, Icon }) => (
+  <div className="card info-card">
+    <div className="info-card__head">
+      <IconBadge><Icon w={24} /></IconBadge>
+      <h3 className="info-card__title">{s.title}</h3>
     </div>
-    {s.lead && <Txt t={t} size={15.5}>{s.lead}</Txt>}
-    <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 9 }}>
+    {s.lead && <p className="lead info-card__lead">{s.lead}</p>}
+    <ul className="bullets">
       {s.items.map(([bold, rest], j) => (
-        <li key={j} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: t.ribbon[j % t.ribbon.length], marginTop: 9, flex: '0 0 auto' }} />
-          <Txt t={t} size={14.5} style={{ lineHeight: 1.6 }}>{bold && <strong style={{ color: t.ink, fontWeight: 600 }}>{bold} </strong>}{rest}</Txt>
+        <li key={j} className="bullet">
+          <span className="bullet__dot" />
+          <span className="bullet__text">{bold && <strong>{bold} </strong>}{rest}</span>
         </li>
       ))}
     </ul>
-    {s.foot && <Txt t={t} size={14.5} style={{ fontStyle: 'italic', marginTop: 2 }}>{s.foot}</Txt>}
-  </Card>
+    {s.foot && <p className="lead info-card__foot">{s.foot}</p>}
+  </div>
 );
-export const BrazilSection = ({ t, L }) => {
+export const BrazilSection = ({ L }) => {
   const B = L.brazil;
   const iconMap = { wifi: Icons.wifi, chat: Icons.chat, money: Icons.money, sun: Icons.sun, leaf: Icons.leaf, shield: Icons.shield, fireworks: Icons.fireworks, fork: Icons.fork, music: Icons.music };
   return (
-    <Section id="brazil" bg={t.alt}>
-      <Wrap>
-        <SectionHead t={t} eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
-        <Photo label={B.photo} h={300} bg={SP.olive} radius={2} style={{ marginBottom: 28 }} />
+    <section id="brazil" className="section section--alt">
+      <div className="wrap">
+        <SectionHead eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
+        <Photo label={B.photo} className="brazil__photo photo--olive" />
 
-        {/* Watch before you come */}
-        <Card t={t} style={{ marginBottom: 28 }}>
-          <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 12 }}>
-            <IconBadge t={t}><Icons.play w={24} /></IconBadge>
-            <div style={{ fontFamily: t.body, fontSize: 23, color: t.ink }}>{B.watch.title}</div>
+        <div className="card watch">
+          <div className="watch__head">
+            <IconBadge><Icons.play w={24} /></IconBadge>
+            <h3 className="watch__title">{B.watch.title}</h3>
           </div>
-          <Txt t={t} size={15.5}>{B.watch.lead}</Txt>
-          <ul style={{ margin: '14px 0 0', padding: 0, listStyle: 'none', display: 'grid', gridTemplateColumns: COLS(240), gap: '9px 28px' }}>
+          <p className="lead watch__lead">{B.watch.lead}</p>
+          <ul className="video-list">
             {B.watch.videos.map(([label, url], i) => (
-              <li key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: t.ribbon[i % t.ribbon.length], marginTop: 9, flex: '0 0 auto' }} />
-                <a href={url} target="_blank" rel="noreferrer" style={{ fontFamily: t.body, fontSize: 15, lineHeight: 1.5, color: t.accentDeep, textDecoration: 'none', borderBottom: `1px solid ${t.accentDeep}55` }}>{label}</a>
+              <li key={i} className="bullet">
+                <span className="bullet__dot" />
+                <a className="video-link" href={url} target="_blank" rel="noreferrer">{label}</a>
               </li>
             ))}
           </ul>
-        </Card>
-
-        {/* Practical guide */}
-        <div style={{ display: 'grid', gridTemplateColumns: COLS(320), gap: 24, marginBottom: 60 }}>
-          {B.info.map((s, i) => <InfoCard key={i} t={t} s={s} Icon={iconMap[s.icon] || Icons.star} />)}
         </div>
 
-        {/* Make it a trip */}
-        <div style={{ textAlign: 'center', marginBottom: 10 }}><Eye t={t}>{B.trip.title}</Eye></div>
-        <Txt t={t} size={17} style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 26px' }}>{B.trip.lead}</Txt>
-        <div style={{ display: 'grid', gridTemplateColumns: COLS(200), gap: 18 }}>
+        <div className="info-grid">
+          {B.info.map((s, i) => <InfoCard key={i} s={s} Icon={iconMap[s.icon] || Icons.star} />)}
+        </div>
+
+        <p className="eyebrow eyebrow--center">{B.trip.title}</p>
+        <p className="lead trip__lead">{B.trip.lead}</p>
+        <div className="trip__grid">
           {B.trip.places.map((name, i) => (
-            <div key={i} style={{ position: 'relative', overflow: 'hidden', border: `1px solid ${t.line}` }}>
-              <Photo label={name.toLowerCase()} h={140} bg={[SP.olive, SP.coralDeep, SP.oliveSoft][i % 3]} radius={0} />
-              <div style={{ padding: '12px 16px', background: t.card }}>
-                <div style={{ fontFamily: t.body, fontSize: 17, color: t.ink, lineHeight: 1.15 }}>{name}</div>
-              </div>
+            <div key={i} className="place">
+              <Photo label={name.toLowerCase()} className="place__photo" />
+              <div className="place__caption"><div className="place__name">{name}</div></div>
             </div>
           ))}
         </div>
-      </Wrap>
-    </Section>
+      </div>
+    </section>
   );
 };
 
 // ---------- BRASÍLIA (the city) ----------
-export const BrasiliaSection = ({ t, L }) => {
+export const BrasiliaSection = ({ L }) => {
   const C = L.brasilia;
   return (
-    <Section id="brasilia" bg={t.page}>
-      <Wrap>
-        <SectionHead t={t} eyebrow={C.eyebrow} title={C.title} />
-        <div style={{ display: 'grid', gridTemplateColumns: COLS(320), gap: 'clamp(28px, 4vw, 40px)', alignItems: 'center', marginBottom: 56 }}>
-          <Photo label={C.photo} h={380} bg={SP.olive} radius={2} />
+    <section id="brasilia" className="section section--page">
+      <div className="wrap">
+        <SectionHead eyebrow={C.eyebrow} title={C.title} />
+        <div className="brasilia__grid">
+          <Photo label={C.photo} className="brasilia__photo photo--olive" />
           <div>
-            <div style={{ display: 'flex', gap: 12, marginBottom: 14 }}><IconBadge t={t}><Icons.building w={26} /></IconBadge></div>
-            <div style={{ fontFamily: t.body, fontSize: 28, color: t.ink, marginBottom: 10 }}>{C.whatTitle}</div>
-            <Txt t={t}>{C.intro}</Txt>
-            <div style={{ marginTop: 18 }}><KRibbon colors={t.ribbon} w={150} h={6} radius={3} /></div>
+            <div className="brasilia__badge"><IconBadge><Icons.building w={26} /></IconBadge></div>
+            <h3 className="brasilia__subtitle">{C.whatTitle}</h3>
+            <p className="lead">{C.intro}</p>
+            <Ribbon className="brasilia__ribbon" />
           </div>
         </div>
 
-        <div style={{ marginBottom: 18, textAlign: 'center' }}><Eye t={t}>{C.seeLabel}</Eye></div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 14 }}>
+        <div className="brasilia__see"><p className="eyebrow">{C.seeLabel}</p></div>
+        <div className="sights">
           {C.sights.map((name, i) => (
-            <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'center', background: t.alt, padding: '14px 18px', border: `1px solid ${t.line}` }}>
-              <span style={{ color: t.accentDeep, flex: '0 0 auto' }}><Icons.pin w={20} /></span>
-              <div style={{ fontFamily: t.body, fontSize: 16.5, color: t.ink, lineHeight: 1.15 }}>{name}</div>
+            <div key={i} className="sight">
+              <span className="sight__icon"><Icons.pin w={20} /></span>
+              <div className="sight__name">{name}</div>
             </div>
           ))}
         </div>
-      </Wrap>
-    </Section>
+      </div>
+    </section>
   );
 };
 
 // ---------- RSVP ----------
-const Field = ({ t, label, ph, h = 52 }) => (
-  <label style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-    <span style={{ fontFamily: t.body, fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', color: t.accentDeep }}>{label}</span>
-    <div style={{ height: h, border: `1px solid ${t.line}`, background: '#fff', display: 'flex', alignItems: h > 70 ? 'flex-start' : 'center', padding: h > 70 ? '12px 16px' : '0 16px', fontFamily: t.body, fontSize: 16, color: `${t.ink}77` }}>{ph}</div>
+const Field = ({ label, ph, tall }) => (
+  <label className="field">
+    <span className="field__label">{label}</span>
+    <div className={'field__box' + (tall ? ' field__box--tall' : '')}>{ph}</div>
   </label>
 );
-export const RsvpSection = ({ t, L }) => {
+export const RsvpSection = ({ L }) => {
   const R = L.rsvp;
   return (
-    <Section id="rsvp" bg={t.alt}>
-      <Wrap w={680}>
-        <SectionHead t={t} eyebrow={R.eyebrow} title={R.title} intro={R.intro} />
+    <section id="rsvp" className="section section--alt">
+      <div className="wrap wrap--narrow">
+        <SectionHead eyebrow={R.eyebrow} title={R.title} intro={R.intro} />
         {R.notes && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
+          <div className="notes">
             {R.notes.map(([label, text], i) => (
-              <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                <span style={{ marginTop: 2 }}><Icons.heart w={22} stroke={t.accentDeep} /></span>
-                <Txt t={t} size={16}><strong style={{ color: t.ink, fontWeight: 600 }}>{label}.</strong> {text}</Txt>
+              <div key={i} className="note">
+                <span className="note__icon"><Icons.heart w={22} /></span>
+                <p className="note__text"><strong>{label}.</strong> {text}</p>
               </div>
             ))}
           </div>
         )}
-        <Card t={t} style={{ padding: '40px 40px', display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <Field t={t} label={R.name} ph={R.namePh} />
-          <Field t={t} label={R.email} ph={R.emailPh} />
-          <div style={{ display: 'grid', gridTemplateColumns: COLS(170), gap: 16 }}>
-            <Field t={t} label={R.attending} ph={R.attendingPh} />
-            <Field t={t} label={R.guests} ph="1" />
+        <div className="card rsvp__form">
+          <Field label={R.name} ph={R.namePh} />
+          <Field label={R.email} ph={R.emailPh} />
+          <div className="rsvp__row">
+            <Field label={R.attending} ph={R.attendingPh} />
+            <Field label={R.guests} ph="1" />
           </div>
-          <Field t={t} label={R.note} ph={R.notePh} h={90} />
-          <div style={{ height: 56, background: t.accent, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: t.body, fontSize: 16, letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: 4, cursor: 'pointer' }}>{R.submit}</div>
-        </Card>
-        {R.foot && <Txt t={t} size={15.5} style={{ textAlign: 'center', marginTop: 24, fontStyle: 'italic' }}>{R.foot}</Txt>}
-      </Wrap>
-    </Section>
+          <Field label={R.note} ph={R.notePh} tall />
+          <div className="btn-submit">{R.submit}</div>
+        </div>
+        {R.foot && <p className="lead rsvp__foot">{R.foot}</p>}
+      </div>
+    </section>
   );
 };
 
 // ---------- REGISTRY ----------
-export const RegistrySection = ({ t, L }) => (
-  <Section id="presentes" bg={t.page}>
-    <Wrap w={1000}>
-      <SectionHead t={t} eyebrow={L.registry.eyebrow} title={L.registry.title} intro={L.registry.intro} />
-      <div style={{ display: 'grid', gridTemplateColumns: COLS(260), gap: 24 }}>
+export const RegistrySection = ({ L }) => (
+  <section id="presentes" className="section section--page">
+    <div className="wrap wrap--mid">
+      <SectionHead eyebrow={L.registry.eyebrow} title={L.registry.title} intro={L.registry.intro} />
+      <div className="gifts">
         {L.registry.ways.map(([name, who, line, handle], i) => (
-          <Card key={i} t={t} style={{ textAlign: 'center', padding: '34px 26px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
-            <IconBadge t={t}><Icons.heart w={24} /></IconBadge>
-            <div style={{ fontFamily: 'Mrs Saint Delafield, cursive', fontSize: 56, color: t.accentDeep, lineHeight: 0.9 }}>{name}</div>
-            <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, letterSpacing: '0.2em', textTransform: 'uppercase', color: t.inkSoft }}>{who}</div>
-            <Txt t={t} size={15} style={{ marginTop: 4 }}>{line}</Txt>
-            <div style={{ fontFamily: t.body, fontSize: 16, color: t.ink, background: t.alt, padding: '8px 16px', borderRadius: 2, wordBreak: 'break-all' }}>{handle}</div>
-          </Card>
+          <div key={i} className="card gift">
+            <IconBadge><Icons.heart w={24} /></IconBadge>
+            <div className="gift__name">{name}</div>
+            <div className="gift__who">{who}</div>
+            <p className="lead gift__line">{line}</p>
+            <div className="gift__handle">{handle}</div>
+          </div>
         ))}
       </div>
-      <Txt t={t} size={14.5} style={{ textAlign: 'center', marginTop: 28, fontStyle: 'italic' }}>{L.registry.note}</Txt>
-    </Wrap>
-  </Section>
+      <p className="lead registry__note">{L.registry.note}</p>
+    </div>
+  </section>
 );
 
 // ---------- FOOTER ----------
-export const Footer = ({ t, L }) => (
-  <footer style={{ background: t.footerBg, color: t.footerFg, padding: '64px 0 56px', textAlign: 'center' }}>
-    <Calli size={'clamp(50px, 13vw, 104px)'} color={t.footerFg}>Anna &amp; Matheus</Calli>
-    <div style={{ fontFamily: t.body, fontSize: 15, letterSpacing: '0.26em', textTransform: 'uppercase', marginTop: 4, opacity: 0.85 }}>{L.footer.dateLine}</div>
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 22 }}><KRibbon colors={t.ribbon} w={180} h={6} radius={3} /></div>
-    <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '0.2em', marginTop: 22, opacity: 0.6 }}>#ANNAEMATHEUS2026 · annaematheus@email.com</div>
+export const Footer = ({ L }) => (
+  <footer className="footer">
+    <div className="calli footer__name">Anna &amp; Matheus</div>
+    <div className="footer__date">{L.footer.dateLine}</div>
+    <Ribbon className="footer__ribbon" />
+    <div className="footer__tag">#ANNAEMATHEUS2026 · annaematheus@email.com</div>
   </footer>
 );

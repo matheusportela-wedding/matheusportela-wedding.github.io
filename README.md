@@ -34,13 +34,14 @@ src/
   main.jsx        App bootstrap (ReactDOM render)
   App.jsx         Tab routing + language state, page assembly
   content.js      ALL guest-facing text, EN + PT  ← edit this for copy changes
-  themes.js       The single site theme ("Cerrado em Cores") — colours & fonts
-  kit.jsx         Palette, ribbon motif, photo placeholder, icons, flags
-  primitives.jsx  Theme-aware layout primitives (Wrap, Card, Section, …)
-  sections.jsx    The page sections (Hero, Event, Travel, RSVP, …)
-  styles.css      Global resets
+  styles.css      ALL styling: design tokens, classes, responsiveness
+  kit.jsx         Ribbon motif, photo placeholder, line icons, flag SVGs
+  primitives.jsx  Reusable bits (SectionHead, IconBadge)
+  sections.jsx    The page sections (Hero, Event, Travel, RSVP, …) — markup only
 docs/             Built output, committed and served by GitHub Pages
 ```
 
-The look is driven entirely by the single `theme` object in `src/themes.js` —
-tweak the colours or fonts there and every section updates.
+Styling lives entirely in `src/styles.css`. The colours and fonts are CSS custom
+properties at the top (`:root`) — change one there ("Cerrado em Cores") and the
+whole site updates. Components carry semantic class names (`.card`, `.hero`,
+`.section-head`, …); tweak a class to restyle every place it's used.

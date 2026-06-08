@@ -1,42 +1,16 @@
-// primitives.jsx — theme-aware layout primitives shared across sections.
+// primitives.jsx — small reusable building blocks shared across sections.
 import React from 'react';
-import { KRibbon } from './kit.jsx';
+import { Ribbon } from './kit.jsx';
 
-export const Wrap = ({ children, w = 1120, style }) => (
-  <div style={{ maxWidth: w, margin: '0 auto', padding: '0 clamp(18px, 4vw, 32px)', ...style }}>{children}</div>
-);
+// Round badge that holds a line icon.
+export const IconBadge = ({ children }) => <span className="icon-badge">{children}</span>;
 
-export const Eye = ({ t, children, color }) => (
-  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 12, letterSpacing: '0.32em', textTransform: 'uppercase', color: color || t.accentDeep }}>{children}</div>
-);
-
-export const Calli = ({ children, size = 86, color, style }) => (
-  <div style={{ fontFamily: 'Mrs Saint Delafield, cursive', fontSize: size, lineHeight: 0.92, color, ...style }}>{children}</div>
-);
-
-export const Txt = ({ t, children, size = 17.5, color, style }) => (
-  <p style={{ fontFamily: t.body, fontSize: size, lineHeight: 1.72, color: color || t.inkSoft, margin: 0, ...style }}>{children}</p>
-);
-
-export const SectionHead = ({ t, eyebrow, title, intro }) => (
-  <div style={{ textAlign: 'center', maxWidth: 740, margin: '0 auto 52px' }}>
-    <Eye t={t} color={t.accentDeep}>{eyebrow}</Eye>
-    <Calli size={'clamp(46px, 9vw, 94px)'} color={t.ink} style={{ margin: '4px 0 0' }}>{title}</Calli>
-    {intro && <Txt t={t} size={19} color={t.inkSoft} style={{ marginTop: 14 }}>{intro}</Txt>}
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-      <KRibbon colors={t.ribbon} w={150} h={6} radius={3} />
-    </div>
+// Centered section header: eyebrow + script title + optional intro + ribbon.
+export const SectionHead = ({ eyebrow, title, intro }) => (
+  <div className="section-head">
+    <p className="eyebrow">{eyebrow}</p>
+    <h2 className="calli section-head__title">{title}</h2>
+    {intro && <p className="lead section-head__intro">{intro}</p>}
+    <Ribbon className="section-head__ribbon" />
   </div>
-);
-
-export const IconBadge = ({ t, children }) => (
-  <div style={{ width: 54, height: 54, borderRadius: '50%', background: t.alt, color: t.accentDeep, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto' }}>{children}</div>
-);
-
-export const Card = ({ t, children, style }) => (
-  <div style={{ background: t.card, border: `1px solid ${t.line}`, padding: '32px 30px', ...style }}>{children}</div>
-);
-
-export const Section = ({ id, bg, pad = 'clamp(64px, 9vw, 110px) 0', children }) => (
-  <section id={id} style={{ background: bg, padding: pad }}>{children}</section>
 );

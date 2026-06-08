@@ -1,48 +1,21 @@
-// kit.jsx — low-level visual building blocks: palette, the ribbon motif,
-// photo placeholder, line icons and flag SVGs. No theme or content dependency.
+// kit.jsx — low-level visual building blocks: the ribbon motif, the photo
+// placeholder, line icons and flag SVGs. All styling lives in styles.css;
+// icons inherit their colour from the parent via `currentColor`.
 import React from 'react';
 
-// ---------- palette ----------
-export const SP = {
-  olive: '#546540', oliveDeep: '#3d4a2e', oliveSoft: '#7a8a64',
-  lime: '#D4E094', cream: '#FDF6CC', creamSoft: '#fbf7e3',
-  coral: '#EE966E', coralDeep: '#d97a4f', blush: '#FADCD7',
-  ink: '#2a2620',
-};
+// Five-colour ribbon bar. Width/placement come from the context class.
+export const Ribbon = ({ className = '' }) => <div className={`ribbon ${className}`.trim()} />;
 
-export function kshade(hex, amt) {
-  const h = hex.replace('#', '');
-  const r = Math.max(0, Math.min(255, parseInt(h.slice(0, 2), 16) + amt));
-  const g = Math.max(0, Math.min(255, parseInt(h.slice(2, 4), 16) + amt));
-  const b = Math.max(0, Math.min(255, parseInt(h.slice(4, 6), 16) + amt));
-  return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
-}
-
-// ---------- ribbon motif ----------
-export const KRibbon = ({ colors = [SP.olive, SP.lime, SP.cream, SP.coral, SP.blush], h = 8, w = '100%', radius = 0, style }) => (
-  <div style={{ display: 'flex', width: w, height: h, borderRadius: radius, overflow: 'hidden', ...style }}>
-    {colors.map((c, i) => <div key={i} style={{ flex: 1, background: c }} />)}
+// Photo placeholder (swapped for real images later). Colour & size: context class.
+export const Photo = ({ label, className = '' }) => (
+  <div className={`photo ${className}`.trim()}>
+    {label ? <span className="photo__label">{label}</span> : null}
   </div>
 );
 
-// ---------- photo placeholder ----------
-export const Photo = ({ label = 'photo', w = '100%', h = 300, bg = SP.olive, fg = 'rgba(255,255,255,0.8)', radius = 0, style }) => (
-  <div style={{
-    width: w, height: h, borderRadius: radius, position: 'relative', overflow: 'hidden',
-    background: `repeating-linear-gradient(135deg, ${bg} 0 14px, ${kshade(bg, -8)} 14px 28px)`,
-    display: 'flex', alignItems: 'center', justifyContent: 'center', ...style,
-  }}>
-    {label ? <span style={{
-      fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '0.14em',
-      textTransform: 'uppercase', color: fg, padding: '5px 11px',
-      background: 'rgba(0,0,0,0.2)', borderRadius: 3,
-    }}>{label}</span> : null}
-  </div>
-);
-
-// ---------- line icons (no emoji) ----------
-const Ic = ({ d, w = 28, stroke = 'currentColor', sw = 1.4, fill = 'none', children, vb = '0 0 24 24' }) => (
-  <svg viewBox={vb} width={w} height={w} fill={fill} stroke={stroke} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round">
+// ---------- line icons ----------
+const Ic = ({ d, w = 28, sw = 1.4, fill = 'none', children, vb = '0 0 24 24', className }) => (
+  <svg className={className} viewBox={vb} width={w} height={w} fill={fill} stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round">
     {d ? <path d={d} /> : children}
   </svg>
 );
@@ -75,7 +48,7 @@ export const Icons = {
 
 // ---------- flags ----------
 export const FlagBR = ({ w = 26 }) => (
-  <svg viewBox="0 0 28 20" width={w} height={w * 20 / 28} style={{ borderRadius: 3, display: 'block' }}>
+  <svg viewBox="0 0 28 20" width={w} height={w * 20 / 28}>
     <rect width="28" height="20" fill="#178a3a" />
     <polygon points="14,2.5 25.5,10 14,17.5 2.5,10" fill="#ffd528" />
     <circle cx="14" cy="10" r="4.3" fill="#1b3b8f" />
@@ -83,9 +56,8 @@ export const FlagBR = ({ w = 26 }) => (
   </svg>
 );
 export const FlagUS = ({ w = 26 }) => (
-  <svg viewBox="0 0 28 20" width={w} height={w * 20 / 28} style={{ borderRadius: 3, display: 'block' }}>
+  <svg viewBox="0 0 28 20" width={w} height={w * 20 / 28}>
     {Array.from({ length: 7 }).map((_, i) => <rect key={i} y={i * 2.857} width="28" height="1.43" fill="#b22234" />)}
-    <rect width="28" height="20" fill="none" />
     <rect width="12" height="10" fill="#3c3b6e" />
     {Array.from({ length: 12 }).map((_, i) => <circle key={i} cx={1.5 + (i % 4) * 3} cy={2 + Math.floor(i / 4) * 3} r="0.7" fill="#fff" />)}
   </svg>

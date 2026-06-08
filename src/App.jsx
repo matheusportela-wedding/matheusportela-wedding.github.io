@@ -1,6 +1,5 @@
 // App.jsx — top-level app: tab routing, language state, page assembly.
 import React, { useState, useEffect } from 'react';
-import { theme as t } from './themes.js';
 import { I18N } from './content.js';
 import {
   Nav, Hero, CoupleIntro, WeddingPartySection, EventSection,
@@ -9,14 +8,14 @@ import {
 } from './sections.jsx';
 
 const PAGES = {
-  inicio: (t, L) => <React.Fragment><Hero t={t} L={L} /><CoupleIntro t={t} L={L} /></React.Fragment>,
-  padrinhos: (t, L) => <WeddingPartySection t={t} L={L} />,
-  evento: (t, L) => <EventSection t={t} L={L} />,
-  viagem: (t, L) => <TravelSection t={t} L={L} />,
-  brazil: (t, L) => <BrazilSection t={t} L={L} />,
-  brasilia: (t, L) => <BrasiliaSection t={t} L={L} />,
-  presentes: (t, L) => <RegistrySection t={t} L={L} />,
-  rsvp: (t, L) => <RsvpSection t={t} L={L} />,
+  inicio: (L) => <React.Fragment><Hero L={L} /><CoupleIntro L={L} /></React.Fragment>,
+  padrinhos: (L) => <WeddingPartySection L={L} />,
+  evento: (L) => <EventSection L={L} />,
+  viagem: (L) => <TravelSection L={L} />,
+  brazil: (L) => <BrazilSection L={L} />,
+  brasilia: (L) => <BrasiliaSection L={L} />,
+  presentes: (L) => <RegistrySection L={L} />,
+  rsvp: (L) => <RsvpSection L={L} />,
 };
 
 export const Site = () => {
@@ -29,10 +28,10 @@ export const Site = () => {
   useEffect(() => { try { history.replaceState(null, '', '#' + tab); } catch (e) {} window.scrollTo(0, 0); }, [tab]);
   const L = I18N[lang];
   return (
-    <div style={{ background: t.page, fontFamily: t.body, color: t.ink, minHeight: '100vh' }}>
-      <Nav t={t} L={L} tab={tab} setTab={setTab} lang={lang} setLang={setLang} />
-      {(PAGES[tab] || PAGES.inicio)(t, L)}
-      <Footer t={t} L={L} />
+    <div>
+      <Nav L={L} tab={tab} setTab={setTab} lang={lang} setLang={setLang} />
+      {(PAGES[tab] || PAGES.inicio)(L)}
+      <Footer L={L} />
     </div>
   );
 };
