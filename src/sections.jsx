@@ -214,6 +214,29 @@ const InfoCard = ({ s, Icon }) => (
     {s.foot && <p className="lead info-card__foot">{s.foot}</p>}
   </div>
 );
+
+// A labeled gallery: a grid of tiles, each with a picture (or placeholder),
+// a name and a short description. Used for biomes, food, cities, sights, etc.
+// To add a photo to a tile, set `img: '/images/xyz.jpg'` on that item in content.js.
+const Gallery = ({ title, lead, foot, items, large }) => (
+  <div className="gallery">
+    <p className="eyebrow eyebrow--center gallery__title">{title}</p>
+    {lead && <p className="lead gallery__lead">{lead}</p>}
+    <div className={'gallery-grid' + (large ? ' gallery-grid--large' : '')}>
+      {items.map((it, i) => (
+        <div key={i} className="tile">
+          <Photo src={it.img} label={it.name} className={'tile__photo' + (it.img ? '' : ' photo__placeholder')} />
+          <div className="tile__body">
+            <div className="tile__name">{it.name}</div>
+            {it.desc && <p className="tile__desc">{it.desc}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+    {foot && <p className="lead gallery__foot">{foot}</p>}
+  </div>
+);
+
 export const BrazilSection = ({ L }) => {
   const B = L.brazil;
   const iconMap = { wifi: Icons.wifi, chat: Icons.chat, money: Icons.money, sun: Icons.sun, leaf: Icons.leaf, shield: Icons.shield, fireworks: Icons.fireworks, fork: Icons.fork, music: Icons.music };
@@ -243,16 +266,11 @@ export const BrazilSection = ({ L }) => {
           {B.info.map((s, i) => <InfoCard key={i} s={s} Icon={iconMap[s.icon] || Icons.star} />)}
         </div>
 
-        <p className="eyebrow eyebrow--center">{B.trip.title}</p>
-        <p className="lead trip__lead">{B.trip.lead}</p>
-        <div className="trip__grid">
-          {B.trip.places.map((name, i) => (
-            <div key={i} className="place">
-              <Photo label={name.toLowerCase()} className="place__photo photo__placeholder" />
-              <div className="place__caption"><div className="place__name">{name}</div></div>
-            </div>
-          ))}
-        </div>
+        <Gallery {...B.biomes} large />
+        <Gallery {...B.food} />
+        <Gallery {...B.holidays} large />
+        <Gallery {...B.music} />
+        <Gallery {...B.trip} large />
       </div>
     </section>
   );
@@ -275,15 +293,7 @@ export const BrasiliaSection = ({ L }) => {
           </div>
         </div>
 
-        <div className="brasilia__see"><p className="eyebrow">{C.seeLabel}</p></div>
-        <div className="sights">
-          {C.sights.map((name, i) => (
-            <div key={i} className="sight">
-              <span className="sight__icon"><Icons.pin w={20} /></span>
-              <div className="sight__name">{name}</div>
-            </div>
-          ))}
-        </div>
+        <Gallery title={C.seeLabel} items={C.sights} large />
       </div>
     </section>
   );
