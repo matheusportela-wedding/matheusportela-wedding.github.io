@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Ribbon, Photo, Icons, FlagBR, FlagUS } from './kit.jsx';
 import { IconBadge, SectionHead } from './primitives.jsx';
+import { rich } from './rich.jsx';
 
 // ---------- NAV ----------
 export const Nav = ({ L, tab, setTab, lang, setLang }) => {
@@ -87,8 +88,8 @@ export const CoupleIntro = ({ L }) => (
         <div>
           <p className="eyebrow">{L.couple.eyebrow}</p>
           <h2 className="calli couple__title">{L.couple.title}</h2>
-          <p className="lead">{L.couple.p1}</p>
-          <p className="lead">{L.couple.p2}</p>
+          <p className="lead">{rich(L.couple.p1)}</p>
+          <p className="lead">{rich(L.couple.p2)}</p>
           <Ribbon className="couple__ribbon" />
         </div>
       </div>
@@ -118,7 +119,7 @@ export const WeddingPartySection = ({ L }) => (
           </div>
         </div>
       ))}
-      {L.party.foot && <p className="lead party__foot">{L.party.foot}</p>}
+      {L.party.foot && <p className="lead party__foot">{rich(L.party.foot)}</p>}
     </div>
   </section>
 );
@@ -137,7 +138,7 @@ export const EventSection = ({ L }) => {
               <div className="timecard__badge"><IconBadge><Icon w={26} /></IconBadge></div>
               <p className="eyebrow">{c.tag}</p>
               <div className="calli timecard__time">{c.time}</div>
-              <p className="lead timecard__desc">{c.desc}</p>
+              <p className="lead timecard__desc">{rich(c.desc)}</p>
             </div>
           ))}
         </div>
@@ -151,7 +152,7 @@ export const EventSection = ({ L }) => {
                   <IconBadge><Icon w={24} /></IconBadge>
                   <div>
                     <div className="detail-row__label">{label}</div>
-                    <p className="lead detail-row__text">{text}</p>
+                    <p className="lead detail-row__text">{rich(text)}</p>
                   </div>
                 </div>
               );
@@ -180,10 +181,10 @@ export const TravelSection = ({ L }) => {
               <div key={i} className="card travel-card">
                 <IconBadge><Icon w={26} /></IconBadge>
                 <h3 className="travel-card__title">{title}</h3>
-                <p className="lead travel-card__lead">{lead}</p>
+                <p className="lead travel-card__lead">{rich(lead)}</p>
                 <ul className="bullets">
                   {items.map((it, j) => (
-                    <li key={j} className="bullet"><span className="bullet__dot" /><span className="bullet__text">{it}</span></li>
+                    <li key={j} className="bullet"><span className="bullet__dot" /><span className="bullet__text">{rich(it)}</span></li>
                   ))}
                 </ul>
               </div>
@@ -202,16 +203,16 @@ const InfoCard = ({ s, Icon }) => (
       <IconBadge><Icon w={24} /></IconBadge>
       <h3 className="info-card__title">{s.title}</h3>
     </div>
-    {s.lead && <p className="lead info-card__lead">{s.lead}</p>}
+    {s.lead && <p className="lead info-card__lead">{rich(s.lead)}</p>}
     <ul className="bullets">
       {s.items.map(([bold, rest], j) => (
         <li key={j} className="bullet">
           <span className="bullet__dot" />
-          <span className="bullet__text">{bold && <strong>{bold} </strong>}{rest}</span>
+          <span className="bullet__text">{bold && <strong>{bold} </strong>}{rich(rest)}</span>
         </li>
       ))}
     </ul>
-    {s.foot && <p className="lead info-card__foot">{s.foot}</p>}
+    {s.foot && <p className="lead info-card__foot">{rich(s.foot)}</p>}
   </div>
 );
 
@@ -221,19 +222,19 @@ const InfoCard = ({ s, Icon }) => (
 const Gallery = ({ title, lead, foot, items, large }) => (
   <div className="gallery">
     <p className="eyebrow eyebrow--center gallery__title">{title}</p>
-    {lead && <p className="lead gallery__lead">{lead}</p>}
+    {lead && <p className="lead gallery__lead">{rich(lead)}</p>}
     <div className={'gallery-grid' + (large ? ' gallery-grid--large' : '')}>
       {items.map((it, i) => (
         <div key={i} className="tile">
           <Photo src={it.img} label={it.name} className={'tile__photo' + (it.img ? '' : ' photo__placeholder')} />
           <div className="tile__body">
             <div className="tile__name">{it.name}</div>
-            {it.desc && <p className="tile__desc">{it.desc}</p>}
+            {it.desc && <p className="tile__desc">{rich(it.desc)}</p>}
           </div>
         </div>
       ))}
     </div>
-    {foot && <p className="lead gallery__foot">{foot}</p>}
+    {foot && <p className="lead gallery__foot">{rich(foot)}</p>}
   </div>
 );
 
@@ -244,14 +245,14 @@ export const BrazilSection = ({ L }) => {
     <section id="brazil" className="section section--page">
       <div className="wrap">
         <SectionHead eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
-        <Photo src="/images/brazil.png" alt="Rio de Janeiro at sunset" className="brazil__photo" />
+        <Photo src="/images/brazil.png" alt="Map of Brazil" className="brazil__photo" />
 
         <div className="card watch">
           <div className="watch__head">
             <IconBadge><Icons.play w={24} /></IconBadge>
             <h3 className="watch__title">{B.watch.title}</h3>
           </div>
-          <p className="lead watch__lead">{B.watch.lead}</p>
+          <p className="lead watch__lead">{rich(B.watch.lead)}</p>
           <ul className="video-list">
             {B.watch.videos.map(([label, url], i) => (
               <li key={i} className="bullet">
@@ -288,7 +289,7 @@ export const BrasiliaSection = ({ L }) => {
           <div>
             <div className="brasilia__badge"><IconBadge><Icons.building w={26} /></IconBadge></div>
             <h3 className="brasilia__subtitle">{C.whatTitle}</h3>
-            <p className="lead">{C.intro}</p>
+            <p className="lead">{rich(C.intro)}</p>
             <Ribbon className="brasilia__ribbon" />
           </div>
         </div>
@@ -317,7 +318,7 @@ export const RsvpSection = ({ L }) => {
             {R.notes.map(([label, text], i) => (
               <div key={i} className="note">
                 <span className="note__icon"><Icons.heart w={22} /></span>
-                <p className="note__text"><strong>{label}.</strong> {text}</p>
+                <p className="note__text"><strong>{label}.</strong> {rich(text)}</p>
               </div>
             ))}
           </div>
@@ -332,7 +333,7 @@ export const RsvpSection = ({ L }) => {
           <Field label={R.note} ph={R.notePh} tall />
           <div className="btn-submit">{R.submit}</div>
         </div>
-        {R.foot && <p className="lead rsvp__foot">{R.foot}</p>}
+        {R.foot && <p className="lead rsvp__foot">{rich(R.foot)}</p>}
       </div>
     </section>
   );
@@ -349,12 +350,12 @@ export const RegistrySection = ({ L }) => (
             <IconBadge><Icons.heart w={24} /></IconBadge>
             <div className="gift__name">{name}</div>
             <div className="gift__who">{who}</div>
-            <p className="lead gift__line">{line}</p>
-            <div className="gift__handle">{handle}</div>
+            <p className="lead gift__line">{rich(line)}</p>
+            <div className="gift__handle">{rich(handle)}</div>
           </div>
         ))}
       </div>
-      <p className="lead registry__note">{L.registry.note}</p>
+      <p className="lead registry__note">{rich(L.registry.note)}</p>
     </div>
   </section>
 );

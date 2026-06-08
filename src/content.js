@@ -51,7 +51,7 @@ export const I18N = {
           'There’s no tipping culture, except at restaurants, where a 10% service charge is already included in the bill.',
         ]],
         ['Visa & entry', 'Requirements changed recently — please check early.', [
-          'US, Canada, China & Australia: e-Visa required (about US$80.90). Apply at the official portal brazil.vfsevisa.com at least 3 weeks ahead.',
+          'US, Canada, China & Australia: e-Visa required (about US$80.90). Apply at the official portal [brazil.vfsevisa.com](https://brazil.vfsevisa.com) at least 3 weeks ahead.',
           'UK & EU: no visa required for tourism up to 90 days.',
           'Passport valid 6+ months. Always confirm with official government sources.',
         ]],
@@ -61,7 +61,7 @@ export const I18N = {
         ]],
       ] },
     brazil: { eyebrow: 'Your first time in Brazil', title: 'Brazil', photo: 'brazil · from coast to cerrado',
-      intro: 'Brazil is a massive country with deep history and rich culture. Here’s our first-timer’s guide to making the most of your visit.',
+      intro: 'Brazil is a _massive_ country with deep history and rich culture. Here’s our first-timer’s guide to making the most of your visit.',
       watch: { title: 'Watch before you come',
         lead: 'A few short videos are a lovely way to arrive already in the mood. If it’s your first time in Brazil, these set the scene:',
         videos: [
@@ -100,7 +100,7 @@ export const I18N = {
         ] },
         { icon: 'shield', title: 'Staying safe', lead: 'Brazil is wonderfully welcoming, but a little street sense goes a long way if you’re coming from a much safer country:', items: [
           ['Keep valuables low-key.', 'Don’t flash jewellery, watches, or your phone on the street — use your phone inside shops or restaurants.'],
-          ['Mind where you go.', 'Stick to busy, well-lit, touristy areas and avoid empty streets. Ask your hotel which neighbourhoods to skip, and never visit favelas.'],
+          ['Mind where you go.', 'Stick to busy, well-lit, touristy areas and avoid empty streets. Ask your hotel which neighbourhoods to skip, and **never** visit favelas.'],
           ['Split your essentials.', 'Carry a copy of your passport’s photo page and leave the original at the hotel; bring two cards and leave one behind.'],
           ['Watch your belongings.', 'Don’t leave bags, phones, or cameras unattended — on the beach, at a table, or anywhere else.'],
         ], foot: 'None of this should make you anxious — reach out to us if you have any questions or concerns!' },
@@ -243,7 +243,7 @@ export const I18N = {
           'Não há cultura de gorjeta, exceto em restaurantes, onde os 10% de serviço já vêm na conta.',
         ]],
         ['Visto & entrada', 'As regras mudaram recentemente — verifique com antecedência.', [
-          'EUA, Canadá, China e Austrália: e-Visa obrigatório (cerca de US$80,90). Solicite no portal oficial brazil.vfsevisa.com com pelo menos 3 semanas de antecedência.',
+          'EUA, Canadá, China e Austrália: e-Visa obrigatório (cerca de US$80,90). Solicite no portal oficial [brazil.vfsevisa.com](https://brazil.vfsevisa.com) com pelo menos 3 semanas de antecedência.',
           'Reino Unido e UE: sem visto para turismo até 90 dias.',
           'Passaporte válido por 6+ meses. Sempre confirme em fontes oficiais do governo.',
         ]],
@@ -253,7 +253,7 @@ export const I18N = {
         ]],
       ] },
     brazil: { eyebrow: 'Sua primeira vez no Brasil', title: 'Brasil', photo: 'brasil · do litoral ao cerrado',
-      intro: 'O Brasil é um país imenso, de história profunda e cultura rica. Este é o nosso guia para quem visita o país pela primeira vez.',
+      intro: 'O Brasil é um país _imenso_, de história profunda e cultura rica. Este é o nosso guia para quem visita o país pela primeira vez.',
       watch: { title: 'Assista antes de vir',
         lead: 'Alguns vídeos curtos são um jeito ótimo de chegar já no clima. Se é a sua primeira vez no Brasil, estes ajudam a preparar o terreno:',
         videos: [
@@ -292,7 +292,7 @@ export const I18N = {
         ] },
         { icon: 'shield', title: 'Segurança', lead: 'O Brasil é muito acolhedor, mas um pouco de atenção ajuda para quem vem de países bem mais seguros:', items: [
           ['Não chame atenção.', 'Evite exibir joias, relógios ou o celular na rua — use o telefone dentro de lojas ou restaurantes.'],
-          ['Cuidado com os lugares.', 'Prefira áreas movimentadas, iluminadas e turísticas, e evite ruas vazias. Pergunte ao hotel quais bairros evitar, e nunca visite favelas.'],
+          ['Cuidado com os lugares.', 'Prefira áreas movimentadas, iluminadas e turísticas, e evite ruas vazias. Pergunte ao hotel quais bairros evitar, e **nunca** visite favelas.'],
           ['Separe o essencial.', 'Leve uma cópia da página de foto do passaporte e deixe o original no hotel; leve dois cartões e deixe um guardado.'],
           ['Fique de olho nos seus pertences.', 'Não deixe bolsas, celulares ou câmeras sem atenção — na praia, na mesa, em qualquer lugar.'],
         ], foot: 'Nada disso deve te deixar ansioso — fale com a gente se tiver qualquer dúvida ou preocupação!' },
@@ -332,8 +332,8 @@ export const I18N = {
       trip: { title: 'Aproveite a viagem',
         lead: 'Brasília fica no centro do país, com conexões rápidas para o litoral e além. Se você vai voar até aqui, vale conhecer mais do Brasil.',
         items: [
-          { name: 'Rio de Janeiro', desc: 'Praias, Cristo Redentor e Pão de Açúcar — o cartão-postal do Brasil.', img: '' },
-          { name: 'Foz do Iguaçu', desc: 'Uma das maiores cataratas do mundo, na fronteira com a Argentina.', img: '' },
+          { name: 'Rio de Janeiro', desc: 'Praias, Cristo Redentor e Pão de Açúcar — o cartão-postal do Brasil.', img: '/images/rio de janeiro.png' },
+          { name: 'Foz do Iguaçu', desc: 'Uma das maiores cataratas do mundo, na fronteira com a Argentina.', img: '/images/foz do iguacu.png' },
           { name: 'Salvador', desc: 'O coração afro-brasileiro da Bahia: cor, história e ritmo.', img: '' },
           { name: 'Floresta Amazônica', desc: 'Passeios de barco e lodges na floresta, geralmente por Manaus.', img: '' },
           { name: 'Fernando de Noronha', desc: 'Um arquipélago protegido com as praias mais lindas do Brasil.', img: '' },

@@ -93,6 +93,10 @@ strong { font-weight: 600; color: var(--ink); }
 .lead--center { text-align: center; }
 .lead--italic { font-style: italic; }
 
+/* inline links written as [label](url) in content strings */
+.link { color: var(--accent-deep); text-decoration: underline; text-decoration-color: rgba(217, 122, 79, 0.5); text-underline-offset: 2px; }
+.link:hover { text-decoration-color: var(--accent-deep); }
+
 /* ribbon motif */
 .ribbon { height: 6px; border-radius: 3px; background: var(--ribbon); }
 
@@ -294,7 +298,7 @@ strong { font-weight: 600; color: var(--ink); }
 .travel-card__lead { font-size: 15.5px; }
 
 /* --------------------------------------------------------------- brazil -- */
-.brazil__photo { height: 300px; margin-bottom: 28px; }
+.brazil__photo { height: 350px; margin-bottom: 28px; }
 .watch { margin-bottom: 28px; }
 .watch__head { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
 .watch__title { font-family: var(--font-body); font-size: 23px; color: var(--ink); }
