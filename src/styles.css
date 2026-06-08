@@ -189,7 +189,7 @@ strong { font-weight: 600; color: var(--ink); }
 }
 .nav__cta--block { width: 100%; }
 
-.nav__flags { display: flex; gap: 16px; align-items: center; padding-left: 8px; border-left: 1px solid rgba(255, 255, 255, 0.22); }
+.nav__flags { display: flex; gap: 16px; align-items: center; padding-left: 8px; }
 .flag { padding: 2px; line-height: 0; border-radius: 4px; opacity: 0.4; }
 .flag--active { opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
 .flag svg { display: block; border-radius: 3px; }
