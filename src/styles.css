@@ -383,3 +383,24 @@ strong { font-weight: 600; color: var(--ink); }
 .footer__date { font-family: var(--font-body); font-size: 15px; letter-spacing: 0.26em; text-transform: uppercase; margin-top: 4px; opacity: 0.85; }
 .footer__ribbon { width: 180px; margin: 22px auto 0; }
 .footer__tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; margin-top: 22px; opacity: 0.6; }
+
+/* ===========================================================================
+   Paper texture (heavyweight cardstock look).
+   TUNE strength via slope='0.18' in the SVG below (lower = subtler).
+   =========================================================================== */
+:root {
+  --paper-grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.7'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='linear'%20slope='0.4'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");
+}
+body,
+.section--page,
+.section--couple,
+.section--alt,
+
+.card,
+.tile__body,
+
+.hero,
+.footer { background-image: var(--paper-grain); }
+
+/* keep the grain off real photographs */
+.photo__img { background-image: none; }
