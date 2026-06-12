@@ -169,7 +169,7 @@ export const EventSection = ({ L }) => {
 
 // ---------- TRAVEL ----------
 export const TravelSection = ({ L }) => {
-  const icons = [Icons.plane, Icons.car, Icons.bed, Icons.money, Icons.passport, Icons.calendar];
+  const icons = [Icons.plane, Icons.passport, Icons.bed, Icons.calendar, Icons.car, Icons.money];
   return (
     <section id="viagem" className="section section--page">
       <div className="wrap">
