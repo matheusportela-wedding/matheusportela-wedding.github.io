@@ -7,7 +7,8 @@ import { rich } from './rich.jsx';
 
 // ---------- NAV ----------
 export const Nav = ({ L, tab, setTab, lang, setLang }) => {
-  const tabs = ['inicio', 'evento', 'padrinhos', 'viagem', 'brasilia', 'brazil', 'presentes'];
+  // const tabs = ['inicio', 'evento', 'padrinhos', 'viagem', 'brasilia', 'brazil', 'presentes'];
+  const tabs = ['inicio', 'evento', 'viagem', 'brasilia', 'brazil', 'presentes'];
   const [open, setOpen] = useState(false);
   const go = (key) => { setTab(key); setOpen(false); };
 
@@ -324,7 +325,12 @@ export const RsvpSection = ({ L }) => {
             ))}
           </div>
         )}
+
         <div className="card rsvp__form">
+          <div className="btn-submit">{R.soon}</div>
+        </div>
+
+        {/* <div className="card rsvp__form">
           <Field label={R.name} ph={R.namePh} />
           <Field label={R.email} ph={R.emailPh} />
           <div className="rsvp__row">
@@ -333,7 +339,7 @@ export const RsvpSection = ({ L }) => {
           </div>
           <Field label={R.note} ph={R.notePh} tall />
           <div className="btn-submit">{R.submit}</div>
-        </div>
+        </div> */}
         {R.foot && <p className="lead rsvp__foot">{rich(R.foot)}</p>}
       </div>
     </section>
