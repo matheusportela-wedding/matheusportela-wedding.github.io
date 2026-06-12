@@ -240,7 +240,7 @@ const Gallery = ({ title, lead, foot, items, large }) => (
 
 export const BrazilSection = ({ L }) => {
   const B = L.brazil;
-  const iconMap = { wifi: Icons.wifi, chat: Icons.chat, money: Icons.money, sun: Icons.sun, leaf: Icons.leaf, shield: Icons.shield, fireworks: Icons.fireworks, fork: Icons.fork, music: Icons.music };
+  const iconMap = { wifi: Icons.wifi, chat: Icons.chat, money: Icons.money, sun: Icons.sun, leaf: Icons.leaf, health: Icons.health, shield: Icons.shield, fireworks: Icons.fireworks, fork: Icons.fork, music: Icons.music };
   return (
     <section id="brazil" className="section section--page">
       <div className="wrap">
@@ -295,6 +295,7 @@ export const BrasiliaSection = ({ L }) => {
         </div>
 
         <Gallery title={C.seeLabel} items={C.sights} large />
+        <Gallery title={C.eatLabel} lead={C.eatLead} items={C.eat} large />
       </div>
     </section>
   );

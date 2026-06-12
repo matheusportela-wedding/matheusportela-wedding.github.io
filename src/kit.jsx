@@ -39,6 +39,7 @@ export const Icons = {
   globe: (p) => <Ic {...p}><circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17M12 3.5c2.5 2.5 2.5 14 0 17M12 3.5c-2.5 2.5-2.5 14 0 17" /></Ic>,
   sun: (p) => <Ic {...p}><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" /></Ic>,
   heart: (p) => <Ic {...p}><path d="M12 20s-7-4.7-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.3 12 20 12 20z" /></Ic>,
+  health: (p) => <Ic {...p}><rect x="3.5" y="5" width="17" height="14" rx="2.5" /><path d="M12 9v6M9 12h6" /></Ic>,
   play: (p) => <Ic {...p}><circle cx="12" cy="12" r="8.5" /><path d="M10 8.5l5 3.5-5 3.5z" /></Ic>,
   wifi: (p) => <Ic {...p}><path d="M4.5 10.5a11 11 0 0 1 15 0" /><path d="M7.5 13.7a6.5 6.5 0 0 1 9 0" /><circle cx="12" cy="17.5" r="0.6" /></Ic>,
   chat: (p) => <Ic {...p}><path d="M20 14a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" /><path d="M8 9h8M8 12h5" /></Ic>,
