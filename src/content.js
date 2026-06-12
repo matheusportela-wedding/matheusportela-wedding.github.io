@@ -221,7 +221,7 @@ export const I18N = {
       foot: 'We know travelling here is a real commitment, and we don’t take it for granted. Thank you for making the effort to celebrate with us!' },
     registry: { eyebrow: 'Gift list', title: 'Gifts',
       intro: 'Your presence — especially for those flying a long way — is genuinely the only gift we’re hoping for. Since we live abroad, please don’t worry about bringing anything physical. If you’d still like to help with our future honeymoon, a contribution is warmly welcomed.',
-      ways: [['Pix', 'Brazil transfers\n(Reais)', 'Email:', 'btg@matheusportela.com'], ['Venmo', 'US transfers\n(Dollars)', 'Handle:\n(last 4 digits of phone number: 7457)', '@matheusportela'], ['Zelle', 'US transfers\n(Dollars)', 'Email:', 'matheus@matheusportela.com'], ['EU', 'European transfers\n(Euros)', 'IBAN:', '**Name:** MATHEUS VIEIRA PORTELA\n**IBAN:** BE22 9672 4991 8947\n**SWIFT/BIC:** TRWIBEB1XXX\n**Bank name and address:**\nWise, Rue du Trône 110, 3rd floor,\nBrussels, 1050, Belgium'], ['Wise', 'International transfers\n(all currencies)', 'Handle:', '@matheusv65'], ['Others', '', 'If you want to gift us but cannot use any of the previous methods, let us know!']],
+      ways: [['Pix', 'Brazil transfers\n(Reais)', 'Email:', 'btg@matheusportela.com'], ['Venmo', 'US transfers\n(Dollars)', 'Handle:\n(last 4 digits of phone number: 7457)', '@matheusportela'], ['Zelle', 'US transfers\n(Dollars)', 'Email:', 'matheus@matheusportela.com'], ['EU', 'European transfers\n(Euros)', 'IBAN:', '**Name:** MATHEUS VIEIRA PORTELA\n**IBAN:** BE22 9672 4991 8947\n**SWIFT/BIC:** TRWIBEB1XXX\n**Bank name and address:**\nWise, Rue du Trône 110, 3rd floor, Brussels, 1050, Belgium'], ['Wise', 'International transfers\n(all currencies)', 'Handle:', '@matheusv65'], ['Others', '', 'If you want to gift us but cannot use any of the previous methods, let us know!']],
       note: 'No gift is ever expected. Truly!' },
     footer: { dateLine: '29 · 12 · 2026 — Brasília, Brazil' },
   },
@@ -303,7 +303,7 @@ export const I18N = {
         ] },
       info: [
         { icon: 'wifi', title: 'Internet (eSIM)', lead: 'Ficar online no Brasil é fácil e barato:', items: [
-          ['O mais simples', 'é um eSIM de viagem comprado antes de embarcar. [Airalo](https://www.airalo.com) (cupon de desconto de $3: MATHEU7267), Holafly ou Saily ativam assim que você pousa — sem trocar o chip físico nem pagar roaming caro.'],
+          ['O mais simples', 'é um eSIM de viagem comprado antes de embarcar. [Airalo](https://www.airalo.com) (cupom de desconto de $3: MATHEU7267), Holafly ou Saily ativam assim que você pousa — sem trocar o chip físico nem pagar roaming caro.'],
           ['Um chip local', 'da Vivo, Claro ou TIM é ainda mais barato, mas geralmente exige um CPF, que a maioria dos visitantes não tem.'],
           ['A cobertura', 'é excelente em todas as grandes cidades, e o Wi-Fi é comum em hotéis, restaurantes e shoppings — é só pedir a senha.'],
           ['Dica:', 'dados móveis são essenciais aqui — você vai precisar para Uber, mapas e tradução.'],
@@ -446,8 +446,8 @@ export const I18N = {
       foot: 'Sabemos que vir até aqui é um compromisso de verdade, e não levamos isso por menos. Obrigado por fazer o esforço de celebrar conosco!' },
     registry: { eyebrow: 'Lista de presentes', title: 'Presentes',
       intro: 'Sua presença — especialmente para quem vem de longe — já é o único presente que esperamos. Como moramos fora, por favor não se preocupe em trazer nada físico. Mas, se quiser nos ajudar com a futura lua de mel, uma contribuição é muito bem-vinda.',
-      ways: [['Pix', 'Para convidados no Brasil', 'Nossa chave PIX:', '[ em breve ]'], ['Venmo', 'Para convidados nos EUA', 'Nos encontre em:', '[ em breve ]'], ['Wise', 'Para convidados internacionais', 'Envie na sua moeda:', '[ em breve ]']],
-      note: 'Os contatos acima serão adicionados antes do lançamento — e nenhum presente é esperado. De verdade.' },
+      ways: [['Pix', 'Transferências no Brasil\n(Reais)', 'E-mail:', 'btg@matheusportela.com'], ['Venmo', 'Transferências nos EUA\n(Dólares)', 'Usuário:\n(últimos 4 dígitos do telefone: 7457)', '@matheusportela'], ['Zelle', 'Transferências nos EUA\n(Dólares)', 'E-mail:', 'matheus@matheusportela.com'], ['Europa', 'Transferências na Europa\n(Euros)', 'IBAN:', '**Nome:** MATHEUS VIEIRA PORTELA\n**IBAN:** BE22 9672 4991 8947\n**SWIFT/BIC:** TRWIBEB1XXX\n**Nome e endereço do banco:**\nWise, Rue du Trône 110, 3rd floor, Brussels, 1050, Belgium'], ['Wise', 'Transferências internacionais\n(todas as moedas)', 'Usuário:', '@matheusv65'], ['Outros', '', 'Se quiser nos presentear mas não conseguir usar nenhum dos métodos acima, é só falar com a gente!']],
+      note: 'Nenhum presente é esperado. De verdade!' },
     footer: { dateLine: '29 · 12 · 2026 — Brasília, Brasil' },
   },
 };

@@ -356,9 +356,9 @@ export const RegistrySection = ({ L }) => (
           <div key={i} className="card gift">
             <IconBadge><Icons.heart w={24} /></IconBadge>
             <div className="gift__name">{name}</div>
-            <div className="gift__who">{who}</div>
-            <p className="lead gift__line">{rich(line)}</p>
-            <div className="gift__handle">{rich(handle)}</div>
+            {who && <div className="gift__who">{rich(who)}</div>}
+            {line && <p className="lead gift__line">{rich(line)}</p>}
+            {handle && <div className="gift__handle">{rich(handle)}</div>}
           </div>
         ))}
       </div>
