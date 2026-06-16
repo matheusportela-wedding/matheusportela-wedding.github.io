@@ -77,9 +77,11 @@
     .scene.is-playing .flap-shadow { animation: shadow-in  5s var(--soft) forwards; }
     .scene.is-playing .letter      { animation: letter-out 5s var(--soft) forwards; }
 
-    @keyframes flap-open {            /* single physical flap rotates open: cream outside → green inside */
-      0%, 15%  { transform: translateZ(8px) rotateX(180deg); }   /* closed */
-      46%,100% { transform: translateZ(8px) rotateX(0deg); }     /* open, lifted back */
+    @keyframes flap-open {            /* single physical flap rotates open: cream outside → green inside.
+                                         180deg -> 360deg sweeps the tip UP TOWARD THE VIEWER (not away),
+                                         so it reads as a real 3D flip instead of shrinking/growing. */
+      0%, 15%  { transform: translateZ(8px) rotateX(180deg); }   /* closed: tip down */
+      46%,100% { transform: translateZ(8px) rotateX(360deg); }   /* open: tip swept toward viewer, then up */
     }
     @keyframes shadow-in {
       0%, 18%  { opacity: 0; }
