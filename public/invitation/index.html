@@ -76,7 +76,7 @@
       aspect-ratio: 0.7135; object-fit: contain;
       transform-origin: 50% 50%;
       /* stored: sideways, fills the envelope, low & BEHIND the front pocket (z below .env-cover) */
-      transform: translateY(31%) translateZ(3px) rotate(-90deg) scale(0.70);
+      transform: translateY(31%) translateZ(3px) rotate(-90deg) scale(0.72);
       filter: drop-shadow(0 0 0 rgba(40, 46, 30, 0));
       -webkit-user-drag: none;
     }
@@ -87,30 +87,34 @@
     .stage.is-playing .flap-shadow{ animation: shadow-in   5s var(--soft) forwards; }
     .stage.is-playing .letter     { animation: letter-out  5s var(--soft) forwards; }
 
-    @keyframes camera-move {          /* dolly in + pan up: closed envelope -> the letter */
-      0%, 15% { transform: translateY(-20%) scale(1.15); }  /* centered on the closed envelope */
-      100%    { transform: translateY(40%)  scale(1.7); }   /* centered on the letter, envelope below the fold */
+    @keyframes camera-move {          /* dolly in + pan up: closed envelope -> the letter.
+                                         zoom stays moderate while the letter rotates (so its corners
+                                         don't clip the frame), then pushes in hard on the upright card. */
+      0%, 6% { transform: translateY(-20%) scale(1.15); }  /* centered on the closed envelope */
+      64%    { transform: translateY(34%)  scale(1.5); }   /* tracking the letter as it rotates upright */
+      100%   { transform: translateY(64%)  scale(2.35); }  /* pushed in: the card fills most of the screen */
     }
 
     @keyframes flap-open {            /* single physical flap rotates open: cream outside → green inside.
                                          180deg -> 360deg sweeps the tip UP TOWARD THE VIEWER (not away),
-                                         so it reads as a real 3D flip instead of shrinking/growing. */
-      0%, 15%  { transform: translateZ(8px) rotateX(180deg); }   /* closed: tip down */
-      46%,100% { transform: translateZ(8px) rotateX(360deg); }   /* open: tip swept toward viewer, then up */
+                                         so it reads as a real 3D flip instead of shrinking/growing.
+                                         translateZ 8 -> 1 drops the opened flap BEHIND the rising letter
+                                         (and snug to the back, closing the throat gap). */
+      0%, 6%   { transform: translateZ(8px) rotateX(180deg); }   /* closed: tip down, in front */
+      28%,100% { transform: translateZ(1px) rotateX(360deg); }   /* open: tip swept toward viewer, then up & back */
     }
     @keyframes shadow-in {
-      0%, 18%  { opacity: 0; }
-      42%      { opacity: 0.16; }
-      100%     { opacity: 0.12; }
+      0%, 8%   { opacity: 0; }
+      26%      { opacity: 0.16; }
+      100%     { opacity: 0.10; }
     }
-    /* the letter keeps a CONSTANT scale (0.72) the whole time — it never grows on its own.
-       1) sideways & hidden  2) flap opens (still inside)  3) comes forward + slides up
-       4) rotates upright, bottom still tucked in the envelope (the camera zoom makes it big). */
+    /* the letter keeps a CONSTANT scale (0.72) — it never grows on its own; the camera zoom makes it big.
+       It stays BEHIND the front pocket (z=3 < cover z=6) so the envelope hides it while it emerges,
+       slides all the way OUT of the pocket, and only then rotates upright in clear space. */
     @keyframes letter-out {
-      0%, 18%  { transform: translateY(31%)  translateZ(3px)  rotate(-90deg) scale(0.72); filter: drop-shadow(0 0 0 rgba(40,46,30,0)); }
-      44%      { transform: translateY(31%)  translateZ(3px)  rotate(-90deg) scale(0.72); filter: drop-shadow(0 0 0 rgba(40,46,30,0)); }
-      66%      { transform: translateY(-14%) translateZ(34px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 12px 18px rgba(40,46,30,0.18)); }
-      88%,100% { transform: translateY(-20%) translateZ(34px) rotate(0deg)   scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
+      0%, 22%  { transform: translateY(31%)  translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 0 0 rgba(40,46,30,0)); }
+      50%      { transform: translateY(-28%) translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 10px 16px rgba(40,46,30,0.16)); }
+      70%,100% { transform: translateY(-28%) translateZ(3px) rotate(0deg)   scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
     }
 
     .tagline { position: absolute; left: 0; right: 0; bottom: clamp(18px,5vh,44px); text-align: center; opacity: 0; transition: opacity 0.8s ease; }
@@ -124,10 +128,10 @@
     @media (prefers-reduced-motion: reduce) {
       .stage.is-playing .camera, .stage.is-playing .flap,
       .stage.is-playing .flap-shadow, .stage.is-playing .letter { animation: none; }
-      .camera { transform: translateY(40%) scale(1.7); }
-      .scene .flap { transform: translateZ(8px) rotateX(0deg); }
-      .scene .flap-shadow { opacity: 0.12; }
-      .scene .letter { transform: translateY(-20%) translateZ(34px) rotate(0deg) scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
+      .camera { transform: translateY(64%) scale(2.35); }
+      .scene .flap { transform: translateZ(1px) rotateX(0deg); }
+      .scene .flap-shadow { opacity: 0.10; }
+      .scene .letter { transform: translateY(-28%) translateZ(3px) rotate(0deg) scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
     }
   </style>
 </head>
