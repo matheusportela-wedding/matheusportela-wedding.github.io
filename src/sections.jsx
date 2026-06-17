@@ -87,7 +87,7 @@ export const CoupleIntro = ({ L }) => (
   <section id="nos" className="section section--couple">
     <div className="wrap">
       <div className="couple__grid">
-        <Photo src="/images/anna-and-matheus.jpg" alt="The couple" className="couple__photo" />
+        <Photo src="/images/anna-and-matheus.webp" alt="The couple" className="couple__photo" />
         <div>
           <p className="eyebrow">{L.couple.eyebrow}</p>
           <h2 className="calli couple__title">{L.couple.title}</h2>
@@ -146,7 +146,7 @@ export const EventSection = ({ L }) => {
           ))}
         </div>
         <div className="event__detail">
-          <Photo src="/images/espaco-renascenca.jpg" alt="The garden at Espaço Renascença" className="event__photo" />
+          <Photo src="/images/espaco-renascenca.webp" alt="The garden at Espaço Renascença" className="event__photo" />
           <div className="card event__card">
             {E.rows.map(([label, text], i) => {
               const Icon = rowIcons[i];
@@ -221,7 +221,7 @@ const InfoCard = ({ s, Icon }) => (
 
 // A labeled gallery: a grid of tiles, each with a picture (or placeholder),
 // a name and a short description. Used for biomes, food, cities, sights, etc.
-// To add a photo to a tile, set `img: '/images/xyz.jpg'` on that item in content.js.
+// To add a photo to a tile, set `img: '/images/xyz.webp'` on that item in content.js.
 const Gallery = ({ title, lead, foot, items, large }) => (
   <div className="gallery">
     <p className="eyebrow eyebrow--center gallery__title">{title}</p>
@@ -248,7 +248,7 @@ export const BrazilSection = ({ L }) => {
     <section id="brazil" className="section section--page">
       <div className="wrap">
         <SectionHead eyebrow={B.eyebrow} title={B.title} intro={B.intro} />
-        <Photo src="/images/brazil.png" alt="Map of Brazil" className="brazil__photo" />
+        <Photo src="/images/brazil.webp" alt="Map of Brazil" className="brazil__photo" />
 
         <div className="card watch">
           <div className="watch__head">
@@ -288,7 +288,7 @@ export const BrasiliaSection = ({ L }) => {
       <div className="wrap">
         <SectionHead eyebrow={C.eyebrow} title={C.title} />
         <div className="brasilia__grid">
-          <Photo src="/images/brasilia.png" alt="Brasília at sunset" className="brasilia__photo" />
+          <Photo src="/images/brasilia.webp" alt="Brasília at sunset" className="brasilia__photo" />
           <div>
             <div className="brasilia__badge"><IconBadge><Icons.building w={26} /></IconBadge></div>
             <h3 className="brasilia__subtitle">{C.whatTitle}</h3>
