@@ -6,6 +6,7 @@ import {
   TravelSection, BrazilSection, BrasiliaSection, RsvpSection,
   RegistrySection, Footer,
 } from './sections.jsx';
+import { InvitationSection } from './invitation.jsx';
 
 const PAGES = {
   inicio: (L) => <React.Fragment><Hero L={L} /><CoupleIntro L={L} /></React.Fragment>,
@@ -15,6 +16,7 @@ const PAGES = {
   brazil: (L) => <BrazilSection L={L} />,
   brasilia: (L) => <BrasiliaSection L={L} />,
   presentes: (L) => <RegistrySection L={L} />,
+  convite: () => <InvitationSection />,
   rsvp: (L) => <RsvpSection L={L} />,
 };
 
@@ -31,7 +33,7 @@ export const Site = () => {
     <div>
       <Nav L={L} tab={tab} setTab={setTab} lang={lang} setLang={setLang} />
       {(PAGES[tab] || PAGES.inicio)(L)}
-      <Footer L={L} />
+      {tab !== 'convite' && <Footer L={L} />}
     </div>
   );
 };

@@ -177,6 +177,7 @@ strong { font-weight: 600; color: var(--ink); }
   color: var(--nav-fg);
   white-space: nowrap;
   opacity: 0.78;
+  text-decoration: none;          /* keep anchor-based links (e.g. Invitation) un-underlined */
 }
 .nav__link.is-active, .nav__menu-link.is-active { opacity: 1; }
 .nav__link { font-size: 13px; padding: 4px 0; border-bottom: 2px solid transparent; }
@@ -404,3 +405,89 @@ body,
 
 /* keep the grain off real photographs */
 .photo__img { background-image: none; }
+
+/* ----------------------------------------------------------- invitation -- */
+/* The envelope-opening invitation, embedded as a full-height section below the
+   nav. Ported verbatim from the original standalone page — every selector is
+   scoped under .invite and the keyframes are prefixed inv- so nothing leaks. */
+.invite {
+  --ew: clamp(240px, min(46vw, 36vh), 540px);     /* envelope width, sized to fit under the nav */
+  --eh: calc(var(--ew) / 0.7135);                 /* envelope height (matches the art aspect) */
+  --hinge: 48.766%;                               /* flap fold line within the art */
+  --soft: cubic-bezier(0.45, 0.05, 0.2, 1);
+  position: relative;
+  height: calc(100svh - 70px);                    /* fill the viewport under the sticky 70px nav */
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: #f4efdc url("/invitation/assets/backdrop.webp") center center / cover no-repeat;
+  -webkit-tap-highlight-color: transparent;
+}
+.invite .stage {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+/* the "camera": starts framed on the closed envelope, then zooms in + pans up to
+   the letter. The letter never scales on its own — its readable size is all camera. */
+.invite .camera {
+  position: relative;
+  width: var(--ew); height: var(--eh);
+  perspective: 1700px; perspective-origin: 50% 46%;
+  transform-origin: 50% 50%;
+  transform: translateY(-20%) scale(1.15);
+}
+.invite .scene { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(4deg); }
+.invite .layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; -webkit-user-drag: none; user-select: none; pointer-events: none; }
+.invite .env-backbase { transform: translateZ(0px); }
+.invite .flap-shadow  { transform: translateZ(0.4px); opacity: 0; filter: blur(9px); }
+.invite .env-cover    { transform: translateZ(6px); }
+/* one physical, two-sided flap hinged at the fold line (cream outer / green inner) */
+.invite .flap { position: absolute; inset: 0; transform-style: preserve-3d; transform-origin: 50% var(--hinge); transform: translateZ(8px) rotateX(180deg); }
+.invite .flap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; backface-visibility: hidden; -webkit-backface-visibility: hidden; -webkit-user-drag: none; pointer-events: none; }
+.invite .flap-outer { transform: rotateY(180deg); }
+.invite .letter {
+  position: absolute; left: 6%; top: 0; width: 88%;
+  aspect-ratio: 0.7146; object-fit: contain; transform-origin: 50% 50%;
+  transform: translateY(31%) translateZ(3px) rotate(-90deg) scale(0.72);
+  filter: drop-shadow(0 0 0 rgba(40, 46, 30, 0)); -webkit-user-drag: none;
+}
+.invite .stage.is-playing .camera     { animation: inv-camera-move 5s var(--soft) forwards; }
+.invite .stage.is-playing .flap       { animation: inv-flap-open   5s var(--soft) forwards; }
+.invite .stage.is-playing .flap-shadow{ animation: inv-shadow-in   5s var(--soft) forwards; }
+.invite .stage.is-playing .letter     { animation: inv-letter-out  5s var(--soft) forwards; }
+@keyframes inv-camera-move {
+  0%, 6% { transform: translateY(-20%) scale(1.15); }
+  64%    { transform: translateY(34%)  scale(1.5); }
+  100%   { transform: translateY(64%)  scale(2.35); }
+}
+@keyframes inv-flap-open {
+  0%, 6%   { transform: translateZ(8px) rotateX(180deg); }
+  28%,100% { transform: translateZ(1px) rotateX(360deg); }
+}
+@keyframes inv-shadow-in {
+  0%, 8% { opacity: 0; }
+  26%    { opacity: 0.16; }
+  100%   { opacity: 0.10; }
+}
+@keyframes inv-letter-out {
+  0%, 22%  { transform: translateY(31%)  translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 0 0 rgba(40,46,30,0)); }
+  50%      { transform: translateY(-28%) translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 10px 16px rgba(40,46,30,0.16)); }
+  70%,100% { transform: translateY(-28%) translateZ(3px) rotate(0deg)   scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
+}
+.invite .replay {
+  position: absolute; right: clamp(14px,4vw,28px); bottom: clamp(14px,4vh,28px);
+  width: 44px; height: 44px; border: none; border-radius: 50%;
+  background: rgba(255,255,255,0.8); box-shadow: 0 6px 18px -6px rgba(40,46,30,0.4);
+  color: #546540; display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; transition: opacity 0.6s ease;
+}
+.invite .replay.show { opacity: 1; }
+.invite .replay svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: reduce) {
+  .invite .stage.is-playing .camera, .invite .stage.is-playing .flap,
+  .invite .stage.is-playing .flap-shadow, .invite .stage.is-playing .letter { animation: none; }
+  .invite .camera { transform: translateY(64%) scale(2.35); }
+  .invite .flap { transform: translateZ(1px) rotateX(0deg); }
+  .invite .flap-shadow { opacity: 0.10; }
+  .invite .letter { transform: translateY(-28%) translateZ(3px) rotate(0deg) scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
+}

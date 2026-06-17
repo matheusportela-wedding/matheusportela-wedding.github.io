@@ -31,6 +31,7 @@ export const Nav = ({ L, tab, setTab, lang, setLang }) => {
           {tabs.map((key) => (
             <button key={key} className={'nav__link' + (tab === key ? ' is-active' : '')} onClick={() => go(key)}>{L.nav[key]}</button>
           ))}
+          <button className={'nav__link' + (tab === 'convite' ? ' is-active' : '')} onClick={() => go('convite')}>{L.nav.convite}</button>
           <button className="nav__cta" onClick={() => go('rsvp')}>{L.nav.confirmar}</button>
           <Flags />
         </nav>
@@ -48,6 +49,7 @@ export const Nav = ({ L, tab, setTab, lang, setLang }) => {
           {tabs.map((key) => (
             <button key={key} className={'nav__menu-link' + (tab === key ? ' is-active' : '')} onClick={() => go(key)}>{L.nav[key]}</button>
           ))}
+          <button className={'nav__menu-link' + (tab === 'convite' ? ' is-active' : '')} onClick={() => go('convite')}>{L.nav.convite}</button>
           <div className="nav__menu-cta"><button className="nav__cta nav__cta--block" onClick={() => go('rsvp')}>{L.nav.confirmar}</button></div>
         </div>
       </div>

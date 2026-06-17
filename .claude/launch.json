@@ -12,12 +12,6 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview", "--", "--port", "4173"],
       "port": 4173
-    },
-    {
-      "name": "inv",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8127", "--directory", "public/invitation"],
-      "port": 8127
     }
   ]
 }

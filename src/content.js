@@ -3,7 +3,7 @@
 export const I18N = {
   en: {
     code: 'en',
-    nav: { inicio: 'Home', padrinhos: 'People', evento: 'Event', viagem: 'Travel', brazil: 'Brazil', brasilia: 'Brasília', presentes: 'Gifts', confirmar: 'RSVP' },
+    nav: { inicio: 'Home', padrinhos: 'People', evento: 'Event', viagem: 'Travel', brazil: 'Brazil', brasilia: 'Brasília', presentes: 'Gifts', convite: 'Invitation', confirmar: 'RSVP' },
     hero: { eyebrow: 'We’re getting married · Brasília, Brazil', dateItalic: 'Tuesday, the twenty-ninth of December, two thousand twenty-six',
       chips: ['29 Dec 2026', '5 PM · Ceremony', 'Brasília, Brazil'] },
     couple: { eyebrow: 'The couple', title: 'Welcome',
@@ -228,7 +228,7 @@ export const I18N = {
 
   pt: {
     code: 'pt',
-    nav: { inicio: 'Início', padrinhos: 'Padrinhos', evento: 'Evento', viagem: 'Viagem', brazil: 'Brasil', brasilia: 'Brasília', presentes: 'Presentes', confirmar: 'Confirmar' },
+    nav: { inicio: 'Início', padrinhos: 'Padrinhos', evento: 'Evento', viagem: 'Viagem', brazil: 'Brasil', brasilia: 'Brasília', presentes: 'Presentes', convite: 'Convite', confirmar: 'Confirmar' },
     hero: { eyebrow: 'Nós vamos casar · Brasília, Brasil', dateItalic: 'terça-feira, vinte e nove de dezembro de dois mil e vinte e seis',
       chips: ['29 Dez 2026', '17h · Cerimônia', 'Brasília, Brasil'] },
     couple: { eyebrow: 'O casal', title: 'Bem-vindos',
