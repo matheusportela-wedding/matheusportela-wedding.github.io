@@ -7,7 +7,9 @@
   <meta name="description" content="Anna & Matheus — Wedding invitation." />
   <style>
     :root {
-      --ew: clamp(230px, 60vw, 340px);          /* envelope width */
+      /* envelope width — sized by BOTH viewport axes so the zoomed-in card fills most of
+         the screen without the card shadow / envelope clipping at the frame edges */
+      --ew: clamp(240px, min(46vw, 40vh), 560px);
       --eh: calc(var(--ew) / 0.7135);            /* envelope height (matches the art aspect) */
       --hinge: 48.766%;                          /* flap fold line within the art */
       --soft: cubic-bezier(0.45, 0.05, 0.2, 1);
@@ -24,7 +26,7 @@
     }
     .stage {
       position: relative;
-      width: min(100vw, 560px); height: 100svh;
+      width: 100vw; height: 100svh;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
     }
@@ -73,7 +75,7 @@
     /* the invitation letter */
     .letter {
       position: absolute; left: 6%; top: 0; width: 88%;
-      aspect-ratio: 0.7135; object-fit: contain;
+      aspect-ratio: 0.7146; object-fit: contain;     /* matches the hi-res card art */
       transform-origin: 50% 50%;
       /* stored: sideways, fills the envelope, low & BEHIND the front pocket (z below .env-cover) */
       transform: translateY(31%) translateZ(3px) rotate(-90deg) scale(0.72);
