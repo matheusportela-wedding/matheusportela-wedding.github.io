@@ -168,7 +168,7 @@ export const I18N = {
           { name: 'Ouro Preto', desc: 'A baroque colonial gem in the mountains of Minas — a UNESCO World Heritage site.', img: '/images/travel-ouro-preto.png' },
         ] } },
     brasilia: { eyebrow: 'The city you’re flying into', title: 'Brasília', photo: 'brasília · modernist skyline',
-      whatTitle: 'A capital like no other',
+      whatTitle: 'A modernist artwork',
       intro: '[Brazil’s capital](https://en.wikipedia.org/wiki/Brasília) was built from open savanna and inaugurated in 1960 — a modernist city imagined by urban planner [Lúcio Costa](https://en.wikipedia.org/wiki/Lúcio_Costa) and architect [Oscar Niemeyer](https://en.wikipedia.org/wiki/Oscar_Niemeyer), laid out in the shape of an aeroplane. Its sweeping concrete-and-glass landmarks earned it UNESCO World Heritage status, and it’s unlike anywhere else on earth.',
       seeLabel: 'Things to see & do',
       sights: [
@@ -393,7 +393,7 @@ export const I18N = {
           { name: 'Ouro Preto', desc: 'Joia colonial barroca nas montanhas de Minas — Patrimônio Mundial da UNESCO.', img: '/images/travel-ouro-preto.png' },
         ] } },
     brasilia: { eyebrow: 'A cidade onde você vai pousar', title: 'Brasília', photo: 'brasília · skyline modernista',
-      whatTitle: 'Uma capital sem igual',
+      whatTitle: 'Uma obra de arte modernista',
       intro: '[A capital do Brasil](https://pt.wikipedia.org/wiki/Brasília) foi construída no cerrado e inaugurada em 1960 — uma cidade modernista imaginada pelo urbanista [Lúcio Costa](https://pt.wikipedia.org/wiki/Lúcio_Costa) e pelo arquiteto [Oscar Niemeyer](https://pt.wikipedia.org/wiki/Oscar_Niemeyer), desenhada em forma de avião. Seus marcos de concreto e vidro lhe renderam o título de Patrimônio Mundial da UNESCO — não existe lugar igual.',
       seeLabel: 'O que ver e fazer',
       sights: [

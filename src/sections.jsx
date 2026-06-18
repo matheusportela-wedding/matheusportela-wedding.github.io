@@ -7,8 +7,7 @@ import { rich } from './rich.jsx';
 
 // ---------- NAV ----------
 export const Nav = ({ L, tab, setTab, lang, setLang }) => {
-  // const tabs = ['inicio', 'evento', 'padrinhos', 'viagem', 'brasilia', 'brazil', 'presentes'];
-  const tabs = ['inicio', 'evento', 'viagem', 'brasilia', 'brazil', 'presentes'];
+  const tabs = ['inicio', 'convite', 'evento', 'viagem', 'brasilia', 'brazil', 'presentes'];
   const [open, setOpen] = useState(false);
   const go = (key) => { setTab(key); setOpen(false); };
 
@@ -31,7 +30,6 @@ export const Nav = ({ L, tab, setTab, lang, setLang }) => {
           {tabs.map((key) => (
             <button key={key} className={'nav__link' + (tab === key ? ' is-active' : '')} onClick={() => go(key)}>{L.nav[key]}</button>
           ))}
-          <button className={'nav__link' + (tab === 'convite' ? ' is-active' : '')} onClick={() => go('convite')}>{L.nav.convite}</button>
           <button className="nav__cta" onClick={() => go('rsvp')}>{L.nav.confirmar}</button>
           <Flags />
         </nav>
@@ -49,7 +47,6 @@ export const Nav = ({ L, tab, setTab, lang, setLang }) => {
           {tabs.map((key) => (
             <button key={key} className={'nav__menu-link' + (tab === key ? ' is-active' : '')} onClick={() => go(key)}>{L.nav[key]}</button>
           ))}
-          <button className={'nav__menu-link' + (tab === 'convite' ? ' is-active' : '')} onClick={() => go('convite')}>{L.nav.convite}</button>
           <div className="nav__menu-cta"><button className="nav__cta nav__cta--block" onClick={() => go('rsvp')}>{L.nav.confirmar}</button></div>
         </div>
       </div>

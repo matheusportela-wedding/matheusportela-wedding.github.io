@@ -49,7 +49,7 @@ export const InvitationSection = () => {
         <div className="camera">
           <div className="scene">
             <img className="layer env-backbase" src={`${A}/envelopeBackBase.webp`} alt="" />
-            <img className="letter" src={`${A}/cardFront.webp`} alt="Anna & Matheus wedding invitation" />
+            <img className="letter" src={`${A}/cardFront.webp`} />
             <img className="layer flap-shadow" src={`${A}/envelopeFrontFlapShadow.webp`} alt="" />
             <img className="layer env-cover" src={`${A}/envelopeBackCover.webp`} alt="" />
             <div className="flap">
