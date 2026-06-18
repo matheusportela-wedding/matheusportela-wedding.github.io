@@ -298,7 +298,7 @@ export const BrasiliaSection = ({ L }) => {
         </div>
 
         <Gallery title={C.seeLabel} items={C.sights} large />
-        <Gallery title={C.eatLabel} lead={C.eatLead} items={C.eat} large />
+        {/* <Gallery title={C.eatLabel} lead={C.eatLead} items={C.eat} large /> */}
       </div>
     </section>
   );
