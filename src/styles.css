@@ -474,12 +474,12 @@ body,
 .invite .card__amp { font-size: 0.92em; font-style: italic; }
 .invite .card__lines {
   font-family: 'EB Garamond', Georgia, serif; text-transform: uppercase;
-  letter-spacing: 0.16em; font-size: 0.32em; line-height: 1.85; margin: 0 0 1.7em; color: #5e6a47;
+  letter-spacing: 0.16em; font-size: 0.30em; line-height: 1.85; margin: 0 0 1.7em; color: #5e6a47;
 }
 .invite .card__lines span { display: block; }
 .invite .card__closing {
   font-family: 'EB Garamond', Georgia, serif; text-transform: uppercase;
-  letter-spacing: 0.16em; font-size: 0.32em; margin: 0; color: #5e6a47;
+  letter-spacing: 0.16em; font-size: 0.30em; margin: 0; color: #5e6a47;
 }
 .invite .stage.is-playing .camera     { animation: inv-camera-move 5s var(--soft) forwards; }
 .invite .stage.is-playing .flap       { animation: inv-flap-open   5s var(--soft) forwards; }
