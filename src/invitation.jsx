@@ -1,11 +1,15 @@
 // invitation.jsx — the envelope-opening invitation, embedded as an in-app section
 // so it shares the site's single <Nav>. All styling lives in styles.css (scoped
-// under .invite). Assets are served from /invitation/assets/ (public/invitation/assets).
+// under .invite). Envelope/bouquet art is served from /invitation/assets/; the card
+// itself is rendered as live text (from L.invite) so it stays crisp at any resolution
+// and can be localised / personalised.
 import React, { useEffect, useRef } from 'react';
 
 const A = '/invitation/assets';
 
-export const InvitationSection = () => {
+export const InvitationSection = ({ L }) => {
+  const inv = (L && L.invite) || {};
+  const names = inv.names || [];
   const stageRef = useRef(null);
   const replayRef = useRef(null);
 
@@ -49,7 +53,23 @@ export const InvitationSection = () => {
         <div className="camera">
           <div className="scene">
             <img className="layer env-backbase" src={`${A}/envelopeBackBase.webp`} alt="" />
-            <img className="letter" src={`${A}/cardFront.webp`} />
+
+            {/* the invitation card — live HTML text, not an image */}
+            <div className="letter" role="img" aria-label={`Wedding invitation — ${names.join(' and ')}`}>
+              <img className="card__bouquet" src={`${A}/bouquet.webp`} alt="" />
+              <p className="card__preline">{inv.preline}</p>
+              <div className="card__names">
+                <span>{names[0]} <span className="card__amp">&amp;</span></span>
+                <span>{names[1]}</span>
+              </div>
+              {[inv.request, inv.date, inv.venue].map((block, bi) => (
+                <p className="card__lines" key={bi}>
+                  {(block || []).map((line, i) => <span key={i}>{line}</span>)}
+                </p>
+              ))}
+              <p className="card__closing">{inv.closing}</p>
+            </div>
+
             <img className="layer flap-shadow" src={`${A}/envelopeFrontFlapShadow.webp`} alt="" />
             <img className="layer env-cover" src={`${A}/envelopeBackCover.webp`} alt="" />
             <div className="flap">

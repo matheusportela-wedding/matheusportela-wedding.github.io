@@ -16,7 +16,7 @@ const PAGES = {
   brazil: (L) => <BrazilSection L={L} />,
   brasilia: (L) => <BrasiliaSection L={L} />,
   presentes: (L) => <RegistrySection L={L} />,
-  convite: () => <InvitationSection />,
+  convite: (L) => <InvitationSection L={L} />,
   rsvp: (L) => <RsvpSection L={L} />,
 };
 

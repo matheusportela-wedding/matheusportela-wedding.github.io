@@ -4,6 +4,16 @@ export const I18N = {
   en: {
     code: 'en',
     nav: { inicio: 'Home', padrinhos: 'People', evento: 'Event', viagem: 'Travel', brazil: 'Brazil', brasilia: 'Brasília', presentes: 'Gifts', convite: 'Invitation', confirmar: 'RSVP' },
+    // The invitation card is rendered as live text (see invitation.jsx) so it stays crisp
+    // at any resolution and can be localised / personalised. Names are proper nouns (unchanged).
+    invite: {
+      preline: 'Together with their families',
+      names: ['Anna Nieve Canning', 'Matheus Vieira Portela'],
+      request: ['Request your presence', 'at the ceremony and celebration', 'of their marriage'],
+      date: ['Tuesday, December 29th, 2026', 'at five o’clock'],
+      venue: ['Espaço Renascença', 'Brasília, Brazil'],
+      closing: 'Reception to follow',
+    },
     hero: { eyebrow: 'We’re getting married · Brasília, Brazil', dateItalic: 'Tuesday, the twenty-ninth of December, two thousand twenty-six',
       chips: ['29 Dec 2026', '5 PM · Ceremony', 'Brasília, Brazil'] },
     couple: { eyebrow: 'The couple', title: 'Welcome',
@@ -229,6 +239,14 @@ export const I18N = {
   pt: {
     code: 'pt',
     nav: { inicio: 'Início', padrinhos: 'Padrinhos', evento: 'Evento', viagem: 'Viagem', brazil: 'Brasil', brasilia: 'Brasília', presentes: 'Presentes', convite: 'Convite', confirmar: 'Confirmar' },
+    invite: {
+      preline: 'Junto com suas famílias',
+      names: ['Anna Nieve Canning', 'Matheus Vieira Portela'],
+      request: ['Solicitam sua presença', 'na cerimônia e celebração', 'de seu casamento'],
+      date: ['Terça-feira, 29 de dezembro de 2026', 'às dezessete horas'],
+      venue: ['Espaço Renascença', 'Brasília, Brasil'],
+      closing: 'Recepção a seguir',
+    },
     hero: { eyebrow: 'Nós vamos casar · Brasília, Brasil', dateItalic: 'terça-feira, vinte e nove de dezembro de dois mil e vinte e seis',
       chips: ['29 Dez 2026', '17h · Cerimônia', 'Brasília, Brasil'] },
     couple: { eyebrow: 'O casal', title: 'Bem-vindos',

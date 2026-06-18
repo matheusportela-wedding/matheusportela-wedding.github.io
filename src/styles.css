@@ -445,11 +445,40 @@ body,
 .invite .flap { position: absolute; inset: 0; transform-style: preserve-3d; transform-origin: 50% var(--hinge); transform: translateZ(8px) rotateX(180deg); }
 .invite .flap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; backface-visibility: hidden; -webkit-backface-visibility: hidden; -webkit-user-drag: none; pointer-events: none; }
 .invite .flap-outer { transform: rotateY(180deg); }
+/* the invitation card — live HTML text (crisp at any resolution), not an image.
+   Keeps the same box/transform as before so the slide-out animation is unchanged.
+   Text is sized in em off a root that scales with the envelope, so it tracks the card. */
 .invite .letter {
+  opacity: 0;
   position: absolute; left: 6%; top: 0; width: 88%;
-  aspect-ratio: 0.7146; object-fit: contain; transform-origin: 50% 50%;
+  aspect-ratio: 0.7146; transform-origin: 50% 50%;
   transform: translateY(31%) translateZ(3px) rotate(-90deg) scale(0.72);
   filter: drop-shadow(0 0 0 rgba(40, 46, 30, 0)); -webkit-user-drag: none;
+  background: #f7f4e9 url("/invitation/assets/letter-paper.webp") center / 100% 100% no-repeat;  /* textured paper + embossed frame */
+  overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  text-align: center; color: #54603e;
+  padding: 11% 12% 9.5%;                           /* sit the text inside the embossed frame */
+  font-size: calc(var(--ew) * 0.083);              /* card type scales with the card (1em base) */
+}
+.invite .card__bouquet { width: 15%; height: auto; display: block; margin: 0.1em auto 0.5em; -webkit-user-drag: none; }
+.invite .card__preline {
+  font-family: 'EB Garamond', Georgia, serif; text-transform: uppercase;
+  letter-spacing: 0.2em; font-size: 0.28em; margin: 0 0 1em; color: #5e6a47;
+}
+.invite .card__names {
+  font-family: 'Mrs Saint Delafield', cursive; color: #4d5836; font-size: 1.3em; line-height: 1.05; margin: 0 0 0.55em;
+}
+.invite .card__names > span { display: block; font-size: 0.8em; }
+.invite .card__amp { font-size: 0.92em; font-style: italic; }
+.invite .card__lines {
+  font-family: 'EB Garamond', Georgia, serif; text-transform: uppercase;
+  letter-spacing: 0.16em; font-size: 0.32em; line-height: 1.85; margin: 0 0 1.7em; color: #5e6a47;
+}
+.invite .card__lines span { display: block; }
+.invite .card__closing {
+  font-family: 'EB Garamond', Georgia, serif; text-transform: uppercase;
+  letter-spacing: 0.16em; font-size: 0.32em; margin: 0; color: #5e6a47;
 }
 .invite .stage.is-playing .camera     { animation: inv-camera-move 5s var(--soft) forwards; }
 .invite .stage.is-playing .flap       { animation: inv-flap-open   5s var(--soft) forwards; }
@@ -470,15 +499,15 @@ body,
   100%   { opacity: 0.10; }
 }
 @keyframes inv-letter-out {
-  0%, 22%  { transform: translateY(31%)  translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 0 0 rgba(40,46,30,0)); }
-  50%      { transform: translateY(-28%) translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 10px 16px rgba(40,46,30,0.16)); }
-  70%,100% { transform: translateY(-28%) translateZ(3px) rotate(0deg)   scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
+  0%, 22%  { opacity: 1; transform: translateY(31%)  translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 0 0 rgba(40,46,30,0)); }
+  50%      { opacity: 1; transform: translateY(-28%) translateZ(3px) rotate(-90deg) scale(0.72); filter: drop-shadow(0 10px 16px rgba(40,46,30,0.16)); }
+  70%,100% { opacity: 1; transform: translateY(-28%) translateZ(3px) rotate(0deg)   scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
 }
 .invite .replay {
   position: absolute; right: clamp(14px,4vw,28px); bottom: clamp(14px,4vh,28px);
   width: 44px; height: 44px; border: none; border-radius: 50%;
-  background: rgba(255,255,255,0.8); box-shadow: 0 6px 18px -6px rgba(40,46,30,0.4);
-  color: #546540; display: flex; align-items: center; justify-content: center; cursor: pointer;
+  background: var(--coral); box-shadow: 0 6px 18px -6px rgba(40,46,30,0.4);
+  color: white; display: flex; align-items: center; justify-content: center; cursor: pointer;
   opacity: 0; transition: opacity 0.6s ease;
 }
 .invite .replay.show { opacity: 1; }
