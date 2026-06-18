@@ -56,7 +56,7 @@ export const InvitationSection = ({ L }) => {
 
             {/* the invitation card — live HTML text, not an image */}
             <div className="letter" role="img" aria-label={`Wedding invitation — ${names.join(' and ')}`}>
-              <img className="card__bouquet" src={`${A}/bouquet.webp`} alt="" />
+              <img className="card__bouquet" src={`${A}/bouquet.gif`} alt="" />
               <p className="card__preline">{inv.preline}</p>
               <div className="card__names">
                 <span>{names[0]} <span className="card__amp">&amp;</span></span>

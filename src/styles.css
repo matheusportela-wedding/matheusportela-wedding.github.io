@@ -419,7 +419,7 @@ body,
   height: calc(100svh - 70px);                    /* fill the viewport under the sticky 70px nav */
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
-  background: #f4efdc url("/invitation/assets/backdrop.webp") center center / cover no-repeat;
+  background: #f4efdc url("/invitation/assets/backdrop.jpg") center center / cover repeat;
   -webkit-tap-highlight-color: transparent;
 }
 .invite .stage {
