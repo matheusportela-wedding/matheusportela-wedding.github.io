@@ -390,7 +390,7 @@ strong { font-weight: 600; color: var(--ink); }
    TUNE strength via slope='0.18' in the SVG below (lower = subtler).
    =========================================================================== */
 :root {
-  --paper-grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.7'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='linear'%20slope='0.4'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E");
+  /* --paper-grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.7'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='linear'%20slope='0.4'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23g)'/%3E%3C/svg%3E"); */
 }
 body,
 .section--page,
@@ -439,11 +439,12 @@ body,
 .invite .scene { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(4deg); }
 .invite .layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; -webkit-user-drag: none; user-select: none; pointer-events: none; }
 .invite .env-backbase { transform: translateZ(0px); }
+.invite .env-liner    { transform: translateZ(1px); }   /* green liner, in front of the back wall, behind the letter */
 .invite .flap-shadow  { transform: translateZ(0.4px); opacity: 0; filter: blur(9px); }
 .invite .env-cover    { transform: translateZ(6px); }
 /* one physical, two-sided flap hinged at the fold line (cream outer / green inner) */
 .invite .flap { position: absolute; inset: 0; transform-style: preserve-3d; transform-origin: 50% var(--hinge); transform: translateZ(8px) rotateX(180deg); }
-.invite .flap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; backface-visibility: hidden; -webkit-backface-visibility: hidden; -webkit-user-drag: none; pointer-events: none; }
+.invite .flap img, .invite .flap svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; backface-visibility: hidden; -webkit-backface-visibility: hidden; -webkit-user-drag: none; pointer-events: none; }
 .invite .flap-outer { transform: rotateY(180deg); }
 /* the invitation card — live HTML text (crisp at any resolution), not an image.
    Keeps the same box/transform as before so the slide-out animation is unchanged.
@@ -487,7 +488,7 @@ body,
 @keyframes inv-camera-move {
   0%, 6% { transform: translateY(-20%) scale(1.15); }
   64%    { transform: translateY(34%)  scale(1.5); }
-  100%   { transform: translateY(64%)  scale(2.35); }
+  100%   { transform: translateY(85%)  scale(2.8); }
 }
 @keyframes inv-flap-open {
   0%, 6%   { transform: translateZ(8px) rotateX(180deg); }

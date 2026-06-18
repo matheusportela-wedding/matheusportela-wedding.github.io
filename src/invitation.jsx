@@ -4,8 +4,15 @@
 // itself is rendered as live text (from L.invite) so it stays crisp at any resolution
 // and can be localised / personalised.
 import React, { useEffect, useRef } from 'react';
+import { ENV_LAYERS } from './envelope-layers.js';
 
 const A = '/invitation/assets';
+// inline SVG layer — re-rasterises crisp at the camera zoom (an <img src=svg> would
+// be decoded to a bitmap at its small layout size and then scaled up, looking soft).
+const EnvLayer = ({ cls, layer }) => (
+  <svg className={cls} viewBox={ENV_LAYERS[layer].vb} preserveAspectRatio="xMidYMid meet"
+       dangerouslySetInnerHTML={{ __html: ENV_LAYERS[layer].svg }} />
+);
 
 export const InvitationSection = ({ L }) => {
   const inv = (L && L.invite) || {};
@@ -52,7 +59,8 @@ export const InvitationSection = ({ L }) => {
       <div className="stage" ref={stageRef}>
         <div className="camera">
           <div className="scene">
-            <img className="layer env-backbase" src={`${A}/envelopeBackBase.webp`} alt="" />
+            <EnvLayer cls="layer env-backbase" layer="back" />
+            <EnvLayer cls="layer env-liner" layer="liner" />
 
             {/* the invitation card — live HTML text, not an image */}
             <div className="letter" role="img" aria-label={`Wedding invitation — ${names.join(' and ')}`}>
@@ -71,10 +79,13 @@ export const InvitationSection = ({ L }) => {
             </div>
 
             <img className="layer flap-shadow" src={`${A}/envelopeFrontFlapShadow.webp`} alt="" />
-            <img className="layer env-cover" src={`${A}/envelopeBackCover.webp`} alt="" />
+            <EnvLayer cls="layer env-cover" layer="cover" />
             <div className="flap">
-              <img className="flap-inner" src={`${A}/envelopeBackFlap.webp`} alt="" />
-              <img className="flap-outer" src={`${A}/envelopeFrontFlap.webp`} alt="" />
+              {/* front face (seen when open): cream flap + green liner inset on top */}
+              <EnvLayer cls="flap-front" layer="flapOuter" />
+              <EnvLayer cls="flap-inner" layer="flapInner" />
+              {/* back face (seen when closed): cream flap */}
+              <EnvLayer cls="flap-outer" layer="flapOuter" />
             </div>
           </div>
         </div>
