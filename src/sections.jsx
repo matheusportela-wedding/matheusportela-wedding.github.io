@@ -130,7 +130,7 @@ export const EventSection = ({ L }) => {
   const E = L.event;
   const rowIcons = [Icons.pin, Icons.fork, Icons.sun];
   return (
-    <section id="evento" className="section section--page">
+    <section id="evento" className="section section--alt">
       <div className="wrap">
         <SectionHead eyebrow={E.eyebrow} title={E.title} intro={E.intro} />
         <div className="event__times">
