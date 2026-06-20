@@ -39,17 +39,14 @@ export const InvitationSection = ({ L }) => {
       }, DURATION);
     };
 
-    const onStageClick = () => { if (replay && replay.classList.contains('show')) play(); };
     const onReplayClick = (e) => { e.stopPropagation(); play(); };
 
-    stage.addEventListener('click', onStageClick);
     if (replay) replay.addEventListener('click', onReplayClick);
     const startTimer = setTimeout(play, 600);
 
     return () => {
       clearTimeout(startTimer);
       clearTimeout(doneTimer);
-      stage.removeEventListener('click', onStageClick);
       if (replay) replay.removeEventListener('click', onReplayClick);
     };
   }, []);

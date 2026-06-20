@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Ribbon, Photo, Icons, FlagBR, FlagUS } from './kit.jsx';
 import { IconBadge, SectionHead } from './primitives.jsx';
 import { rich } from './rich.jsx';
+import { RSVP, RSVP_READY } from './rsvp-config.js';
 
 // ---------- NAV ----------
 export const Nav = ({ L, tab, setTab, lang, setLang }) => {
@@ -302,14 +303,37 @@ export const BrasiliaSection = ({ L }) => {
 };
 
 // ---------- RSVP ----------
-const Field = ({ label, ph, tall }) => (
-  <label className="field">
-    <span className="field__label">{label}</span>
-    <div className={'field__box' + (tall ? ' field__box--tall' : '')}>{ph}</div>
-  </label>
-);
+// A site-styled form that POSTs to a Google Form's /formResponse endpoint (see
+// rsvp-config.js). The Form ids it ships are submit-only public identifiers, so
+// there are no secrets in the client; responses land in the couple's Google Sheet.
 export const RsvpSection = ({ L }) => {
   const R = L.rsvp;
+  const [form, setForm] = useState({ name: '', email: '', attending: '', guests: '1', note: '', hp: '' });
+  const [status, setStatus] = useState('idle');   // idle | sending | done | error
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (form.hp) { setStatus('done'); return; }    // honeypot tripped → drop silently
+    if (!form.name.trim() || !form.attending) return;
+    setStatus('sending');
+    const data = new URLSearchParams();
+    data.append(RSVP.fields.name, form.name.trim());
+    data.append(RSVP.fields.email, form.email.trim());
+    data.append(RSVP.fields.attending, RSVP.attendingValues[form.attending] || form.attending);
+    if (form.attending === 'yes') data.append(RSVP.fields.guests, form.guests);
+    data.append(RSVP.fields.note, form.note.trim());
+    try {
+      // Google sends no CORS headers, so the response is opaque (no-cors). We can't
+      // read its status — the submission still lands — so we report success unless
+      // the request itself fails to leave the browser (e.g. offline).
+      await fetch(RSVP.action, { method: 'POST', mode: 'no-cors', body: data });
+      setStatus('done');
+    } catch (err) {
+      setStatus('error');
+    }
+  };
+
   return (
     <section id="rsvp" className="section section--page">
       <div className="wrap wrap--narrow">
@@ -325,20 +349,53 @@ export const RsvpSection = ({ L }) => {
           </div>
         )}
 
-        <div className="card rsvp__form">
-          <div className="btn-submit">{R.soon}</div>
-        </div>
-
-        {/* <div className="card rsvp__form">
-          <Field label={R.name} ph={R.namePh} />
-          <Field label={R.email} ph={R.emailPh} />
-          <div className="rsvp__row">
-            <Field label={R.attending} ph={R.attendingPh} />
-            <Field label={R.guests} ph="1" />
+        {!RSVP_READY ? (
+          <div className="card rsvp__form"><div className="btn-submit">{R.soon}</div></div>
+        ) : status === 'done' ? (
+          <div className="card rsvp__done">
+            <span className="rsvp__done-icon"><Icons.heart w={36} /></span>
+            <p className="rsvp__done-title">{R.thanks}</p>
+            <p className="lead">{R.thanksBody}</p>
           </div>
-          <Field label={R.note} ph={R.notePh} tall />
-          <div className="btn-submit">{R.submit}</div>
-        </div> */}
+        ) : (
+          <form className="card rsvp__form" onSubmit={submit} noValidate>
+            <label className="field">
+              <span className="field__label">{R.name}</span>
+              <input className="field__input" value={form.name} onChange={set('name')} placeholder={R.namePh} required />
+            </label>
+            <label className="field">
+              <span className="field__label">{R.email}</span>
+              <input className="field__input" type="email" value={form.email} onChange={set('email')} placeholder={R.emailPh} />
+            </label>
+            <div className="rsvp__row">
+              <label className="field">
+                <span className="field__label">{R.attending}</span>
+                <select className="field__input" value={form.attending} onChange={set('attending')} required>
+                  <option value="" disabled>{R.attendingPh}</option>
+                  <option value="yes">{R.yes}</option>
+                  <option value="no">{R.no}</option>
+                </select>
+              </label>
+              {form.attending === 'yes' && (
+                <label className="field">
+                  <span className="field__label">{R.guests}</span>
+                  <input className="field__input" type="number" min="1" max="10" value={form.guests} onChange={set('guests')} />
+                </label>
+              )}
+            </div>
+            <label className="field">
+              <span className="field__label">{R.note}</span>
+              <textarea className="field__input field__input--tall" value={form.note} onChange={set('note')} placeholder={R.notePh} rows={3} />
+            </label>
+            {/* honeypot: off-screen, not for humans. Bots that fill it get dropped. */}
+            <input className="rsvp__hp" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                   value={form.hp} onChange={set('hp')} />
+            {status === 'error' && <p className="rsvp__error">{R.error}</p>}
+            <button type="submit" className="btn-submit" disabled={status === 'sending'}>
+              {status === 'sending' ? R.sending : R.submit}
+            </button>
+          </form>
+        )}
         {R.foot && <p className="lead rsvp__foot">{rich(R.foot)}</p>}
       </div>
     </section>
