@@ -43,4 +43,4 @@ export const RSVP = {
 
 // Control whether to display the form. Until then the UI shows a "coming soon"
 // placeholder instead of a form that would silently fail.
-export const RSVP_READY = false;
+export const RSVP_READY = true;
