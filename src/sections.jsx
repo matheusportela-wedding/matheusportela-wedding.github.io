@@ -323,14 +323,20 @@ export const RsvpSection = ({ L }) => {
     data.append(RSVP.fields.attending, RSVP.attendingValues[form.attending] || form.attending);
     if (form.attending === 'yes') data.append(RSVP.fields.guests, form.guests);
     data.append(RSVP.fields.note, form.note.trim());
+    // Google sends no CORS headers, so the response is opaque (no-cors): the browser
+    // forbids reading its HTTP status (a 200 and a 401 are indistinguishable here).
+    // The only failure we can detect is the request never completing — offline, Google
+    // unreachable, or a hung connection — so we abort after a timeout and surface that
+    // as an error instead of a false "thank you".
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 10000);
     try {
-      // Google sends no CORS headers, so the response is opaque (no-cors). We can't
-      // read its status — the submission still lands — so we report success unless
-      // the request itself fails to leave the browser (e.g. offline).
-      await fetch(RSVP.action, { method: 'POST', mode: 'no-cors', body: data });
+      await fetch(RSVP.action, { method: 'POST', mode: 'no-cors', body: data, signal: ctrl.signal });
       setStatus('done');
     } catch (err) {
       setStatus('error');
+    } finally {
+      clearTimeout(timer);
     }
   };
 
