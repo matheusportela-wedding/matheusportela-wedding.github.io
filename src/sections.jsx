@@ -308,7 +308,7 @@ export const BrasiliaSection = ({ L }) => {
 // there are no secrets in the client; responses land in the couple's Google Sheet.
 export const RsvpSection = ({ L }) => {
   const R = L.rsvp;
-  const [form, setForm] = useState({ name: '', email: '', phone: '', attending: '', note: '', hp: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', attending: '', guests: '1', note: '', hp: '' });
   const [status, setStatus] = useState('idle');    // idle | sending | done | error
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
@@ -322,6 +322,7 @@ export const RsvpSection = ({ L }) => {
     data.append(RSVP.fields.email, form.email.trim());
     data.append(RSVP.fields.phone, form.phone.trim());
     data.append(RSVP.fields.attending, RSVP.attendingValues[form.attending] || form.attending);
+    if (form.attending === 'yes') data.append(RSVP.fields.guests, form.guests);
     data.append(RSVP.fields.note, form.note.trim());
     // Google sends no CORS headers, so the response is opaque (no-cors): the browser
     // forbids reading its HTTP status (a 200 and a 401 are indistinguishable here).
@@ -385,6 +386,12 @@ export const RsvpSection = ({ L }) => {
                 <option value="no">{R.no}</option>
               </select>
             </label>
+            {form.attending === 'yes' && (
+              <label className="field">
+                <span className="field__label">{R.guests}</span>
+                <input className="field__input" type="number" min="1" max="10" value={form.guests} onChange={set('guests')} />
+              </label>
+            )}
             <label className="field">
               <span className="field__label">{R.note}</span>
               <textarea className="field__input field__input--tall" value={form.note} onChange={set('note')} placeholder={R.notePh} rows={3} />
