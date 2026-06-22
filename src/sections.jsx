@@ -8,7 +8,7 @@ import { RSVP, RSVP_READY } from './rsvp-config.js';
 
 // ---------- NAV ----------
 export const Nav = ({ L, tab, setTab, lang, setLang }) => {
-  const tabs = ['inicio', 'convite', 'evento', 'viagem', 'brasilia', 'brazil', 'presentes'];
+  const tabs = ['home', 'invitation', 'event', 'travel', 'brasilia', 'brazil', 'gifts'];
   const [open, setOpen] = useState(false);
   const go = (key) => { setTab(key); setOpen(false); };
 
@@ -25,7 +25,7 @@ export const Nav = ({ L, tab, setTab, lang, setLang }) => {
   return (
     <header className="nav">
       <div className="nav__bar wrap wrap--wide">
-        <button className="nav__logo calli" onClick={() => go('inicio')}>A&amp;M</button>
+        <button className="nav__logo calli" onClick={() => go('home')}>A&amp;M</button>
 
         <nav className="nav__links">
           {tabs.map((key) => (
@@ -59,7 +59,7 @@ export const Nav = ({ L, tab, setTab, lang, setLang }) => {
 export const Hero = ({ L }) => {
   const icons = [Icons.calendar, Icons.clock, Icons.pin];
   return (
-    <section id="inicio" className="hero">
+    <section id="home" className="hero">
       <div className="hero__inner wrap">
         <p className="eyebrow hero__eyebrow">{L.hero.eyebrow}</p>
         <h1 className="calli hero__name">Anna <span className="amp">&amp;</span> Matheus</h1>
@@ -109,7 +109,7 @@ const Person = ({ name, role }) => (
   </div>
 );
 export const WeddingPartySection = ({ L }) => (
-  <section id="padrinhos" className="section section--alt">
+  <section id="party" className="section section--alt">
     <div className="wrap">
       <SectionHead eyebrow={L.party.eyebrow} title={L.party.title} intro={L.party.intro} />
       {L.party.groups.map((g, gi) => (
@@ -130,7 +130,7 @@ export const EventSection = ({ L }) => {
   const E = L.event;
   const rowIcons = [Icons.pin, Icons.fork, Icons.sun];
   return (
-    <section id="evento" className="section section--alt">
+    <section id="event" className="section section--alt">
       <div className="wrap">
         <SectionHead eyebrow={E.eyebrow} title={E.title} intro={E.intro} />
         <div className="event__times">
@@ -172,7 +172,7 @@ export const EventSection = ({ L }) => {
 export const TravelSection = ({ L }) => {
   const icons = [Icons.plane, Icons.passport, Icons.bed, Icons.calendar, Icons.car, Icons.money];
   return (
-    <section id="viagem" className="section section--page">
+    <section id="travel" className="section section--page">
       <div className="wrap">
         <SectionHead eyebrow={L.travel.eyebrow} title={L.travel.title} intro={L.travel.intro} />
         <div className="cards-3">
@@ -410,7 +410,7 @@ export const RsvpSection = ({ L }) => {
 
 // ---------- REGISTRY ----------
 export const RegistrySection = ({ L }) => (
-  <section id="presentes" className="section section--alt">
+  <section id="gifts" className="section section--alt">
     <div className="wrap wrap--mid">
       <SectionHead eyebrow={L.registry.eyebrow} title={L.registry.title} intro={L.registry.intro} />
       <div className="gifts">

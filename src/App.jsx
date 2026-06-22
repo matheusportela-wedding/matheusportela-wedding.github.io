@@ -9,31 +9,43 @@ import {
 import { InvitationSection } from './invitation.jsx';
 
 const PAGES = {
-  inicio: (L) => <React.Fragment><Hero L={L} /><CoupleIntro L={L} /></React.Fragment>,
-  padrinhos: (L) => <WeddingPartySection L={L} />,
-  evento: (L) => <EventSection L={L} />,
-  viagem: (L) => <TravelSection L={L} />,
+  home: (L) => <React.Fragment><Hero L={L} /><CoupleIntro L={L} /></React.Fragment>,
+  party: (L) => <WeddingPartySection L={L} />,
+  event: (L) => <EventSection L={L} />,
+  travel: (L) => <TravelSection L={L} />,
   brazil: (L) => <BrazilSection L={L} />,
   brasilia: (L) => <BrasiliaSection L={L} />,
-  presentes: (L) => <RegistrySection L={L} />,
-  convite: (L) => <InvitationSection L={L} />,
+  gifts: (L) => <RegistrySection L={L} />,
+  invitation: (L) => <InvitationSection L={L} />,
   rsvp: (L) => <RsvpSection L={L} />,
 };
 
+const LANGS = ['pt', 'en'];
+// Language can be forced via a ?lang= query param so guests can be sent a link that
+// lands in the right language (e.g. ...?lang=en). It takes precedence over a previously
+// remembered choice; if absent/invalid we fall back to localStorage, then Portuguese.
+const langFromUrl = () => {
+  const q = new URLSearchParams(location.search).get('lang');
+  return LANGS.includes(q) ? q : null;
+};
+
 export const Site = () => {
-  const [lang, setLang] = useState(localStorage.getItem('am-lang') || 'pt');
+  const [lang, setLang] = useState(() => langFromUrl() || localStorage.getItem('am-lang') || 'pt');
   const [tab, setTab] = useState(() => {
     const h = (location.hash || '').replace('#', '');
-    return PAGES[h] ? h : 'inicio';
+    return PAGES[h] ? h : 'home';
   });
   useEffect(() => { localStorage.setItem('am-lang', lang); document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'; }, [lang]);
-  useEffect(() => { try { history.replaceState(null, '', '#' + tab); } catch (e) {} window.scrollTo(0, 0); }, [tab]);
+  // keep the URL (?lang=…#tab) reflecting the current language + page, so whatever is in
+  // the address bar can be copied and shared as-is.
+  useEffect(() => { try { history.replaceState(null, '', `?lang=${lang}#${tab}`); } catch (e) {} }, [lang, tab]);
+  useEffect(() => { window.scrollTo(0, 0); }, [tab]);
   const L = I18N[lang];
   return (
     <div>
       <Nav L={L} tab={tab} setTab={setTab} lang={lang} setLang={setLang} />
-      {(PAGES[tab] || PAGES.inicio)(L)}
-      {tab !== 'convite' && <Footer L={L} />}
+      {(PAGES[tab] || PAGES.home)(L)}
+      {tab !== 'invitation' && <Footer L={L} />}
     </div>
   );
 };

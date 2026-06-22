@@ -3,7 +3,7 @@
 export const I18N = {
   en: {
     code: 'en',
-    nav: { inicio: 'Home', padrinhos: 'People', evento: 'Event', viagem: 'Travel', brazil: 'Brazil', brasilia: 'Brasília', presentes: 'Gifts', convite: 'Invitation', confirmar: 'RSVP' },
+    nav: { home: 'Home', party: 'People', event: 'Event', travel: 'Travel', brazil: 'Brazil', brasilia: 'Brasília', gifts: 'Gifts', invitation: 'Invitation', confirmar: 'RSVP' },
     // The invitation card is rendered as live text (see invitation.jsx) so it stays crisp
     // at any resolution and can be localised / personalised. Names are proper nouns (unchanged).
     invite: {
@@ -241,7 +241,7 @@ export const I18N = {
 
   pt: {
     code: 'pt',
-    nav: { inicio: 'Início', padrinhos: 'Padrinhos', evento: 'Evento', viagem: 'Viagem', brazil: 'Brasil', brasilia: 'Brasília', presentes: 'Presentes', convite: 'Convite', confirmar: 'Confirmar' },
+    nav: { home: 'Início', party: 'Padrinhos', event: 'Evento', travel: 'Viagem', brazil: 'Brasil', brasilia: 'Brasília', gifts: 'Presentes', invitation: 'Convite', confirmar: 'Confirmar' },
     invite: {
       preline: 'Junto com suas famílias',
       names: ['Anna Nieve Canning', 'Matheus Vieira Portela'],
