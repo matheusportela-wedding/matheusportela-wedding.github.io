@@ -308,8 +308,8 @@ export const BrasiliaSection = ({ L }) => {
 // there are no secrets in the client; responses land in the couple's Google Sheet.
 export const RsvpSection = ({ L }) => {
   const R = L.rsvp;
-  const [form, setForm] = useState({ name: '', email: '', attending: '', guests: '1', note: '', hp: '' });
-  const [status, setStatus] = useState('idle');   // idle | sending | done | error
+  const [form, setForm] = useState({ name: '', email: '', phone: '', attending: '', note: '', hp: '' });
+  const [status, setStatus] = useState('idle');    // idle | sending | done | error
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const submit = async (e) => {
@@ -320,8 +320,8 @@ export const RsvpSection = ({ L }) => {
     const data = new URLSearchParams();
     data.append(RSVP.fields.name, form.name.trim());
     data.append(RSVP.fields.email, form.email.trim());
+    data.append(RSVP.fields.phone, form.phone.trim());
     data.append(RSVP.fields.attending, RSVP.attendingValues[form.attending] || form.attending);
-    if (form.attending === 'yes') data.append(RSVP.fields.guests, form.guests);
     data.append(RSVP.fields.note, form.note.trim());
     // Google sends no CORS headers, so the response is opaque (no-cors): the browser
     // forbids reading its HTTP status (a 200 and a 401 are indistinguishable here).
@@ -373,22 +373,18 @@ export const RsvpSection = ({ L }) => {
               <span className="field__label">{R.email}</span>
               <input className="field__input" type="email" value={form.email} onChange={set('email')} placeholder={R.emailPh} />
             </label>
-            <div className="rsvp__row">
-              <label className="field">
-                <span className="field__label">{R.attending}</span>
-                <select className="field__input" value={form.attending} onChange={set('attending')} required>
-                  <option value="" disabled>{R.attendingPh}</option>
-                  <option value="yes">{R.yes}</option>
-                  <option value="no">{R.no}</option>
-                </select>
-              </label>
-              {form.attending === 'yes' && (
-                <label className="field">
-                  <span className="field__label">{R.guests}</span>
-                  <input className="field__input" type="number" min="1" max="10" value={form.guests} onChange={set('guests')} />
-                </label>
-              )}
-            </div>
+            <label className="field">
+              <span className="field__label">{R.phone}</span>
+              <input className="field__input" type="tel" value={form.phone} onChange={set('phone')} placeholder={R.phonePh} />
+            </label>
+            <label className="field">
+              <span className="field__label">{R.attending}</span>
+              <select className="field__input" value={form.attending} onChange={set('attending')} required>
+                <option value="" disabled>{R.attendingPh}</option>
+                <option value="yes">{R.yes}</option>
+                <option value="no">{R.no}</option>
+              </select>
+            </label>
             <label className="field">
               <span className="field__label">{R.note}</span>
               <textarea className="field__input field__input--tall" value={form.note} onChange={set('note')} placeholder={R.notePh} rows={3} />
