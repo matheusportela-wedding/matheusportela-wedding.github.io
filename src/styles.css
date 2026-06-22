@@ -453,6 +453,7 @@ body,
   --ew: clamp(240px, min(46vw, 36vh), 540px);     /* envelope width, sized to fit under the nav */
   --eh: calc(var(--ew) / 0.7135);                 /* envelope height (matches the art aspect) */
   --hinge: 48.766%;                               /* flap fold line within the art */
+  --zoom-final: 2.8;                              /* end-of-animation zoom; reduced on phones so the letter fits */
   --soft: cubic-bezier(0.45, 0.05, 0.2, 1);
   position: relative;
   height: calc(100svh - 70px);                    /* fill the viewport under the sticky 70px nav */
@@ -501,7 +502,10 @@ body,
   padding: 11% 12% 9.5%;                           /* sit the text inside the embossed frame */
   font-size: calc(var(--ew) * 0.083);              /* card type scales with the card (1em base) */
 }
-.invite .card__bouquet { width: 15%; height: auto; display: block; margin: 0.1em auto 0.5em; -webkit-user-drag: none; }
+/* explicit aspect-ratio (gif is 305×512): iOS Safari mis-sizes animated GIFs with
+   height:auto inside transformed layers, stretching them on the y-axis and pushing
+   the card text down — pinning the ratio keeps it correct. */
+.invite .card__bouquet { width: 15%; height: auto; aspect-ratio: 305 / 512; display: block; margin: 0.1em auto 0.5em; -webkit-user-drag: none; }
 .invite .card__preline {
   font-family: 'EB Garamond', Georgia, serif; text-transform: uppercase;
   letter-spacing: 0.2em; font-size: 0.28em; margin: 0 0 1em; color: #5e6a47;
@@ -527,7 +531,7 @@ body,
 @keyframes inv-camera-move {
   0%, 6% { transform: translateY(-20%) scale(1.15); }
   64%    { transform: translateY(34%)  scale(1.5); }
-  100%   { transform: translateY(85%)  scale(2.8); }
+  100%   { transform: translateY(85%)  scale(var(--zoom-final)); }
 }
 @keyframes inv-flap-open {
   0%, 6%   { transform: translateZ(8px) rotateX(180deg); }
@@ -559,4 +563,9 @@ body,
   .invite .flap { transform: translateZ(1px) rotateX(0deg); }
   .invite .flap-shadow { opacity: 0.10; }
   .invite .letter { transform: translateY(-28%) translateZ(3px) rotate(0deg) scale(0.72); filter: drop-shadow(0 16px 24px rgba(40,46,30,0.26)); }
+}
+/* phones: the full 2.8× zoom makes the letter wider than the screen and clips the
+   bottom line. Ease the final zoom so the whole card fits within the viewport. */
+@media (max-width: 480px) {
+  .invite { --zoom-final: 2.3; }
 }
