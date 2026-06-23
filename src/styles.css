@@ -259,9 +259,12 @@ strong { font-weight: 600; color: var(--ink); }
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 /* gentle scattered tilt, straightened on hover */
-.polaroid:nth-child(3n + 1) { transform: rotate(-1.4deg); }
-.polaroid:nth-child(3n + 2) { transform: rotate(0.9deg); }
-.polaroid:nth-child(3n)     { transform: rotate(-0.6deg); }
+.polaroid:nth-child(6n + 1) { transform: rotate(-5deg); }
+.polaroid:nth-child(6n + 2) { transform: rotate(3deg); }
+.polaroid:nth-child(6n + 3) { transform: rotate(-1.75deg); }
+.polaroid:nth-child(6n + 4) { transform: rotate(2.5deg); }
+.polaroid:nth-child(6n + 5) { transform: rotate(-3.95deg); }
+.polaroid:nth-child(6n)     { transform: rotate(4.5deg); }
 .polaroid:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 0 18px 34px -14px rgba(40, 46, 30, 0.48); }
 .polaroid__photo {
   aspect-ratio: 1 / 1;
@@ -281,7 +284,6 @@ strong { font-weight: 600; color: var(--ink); }
 }
 @media (max-width: 720px) {
   .polaroid-grid { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; gap: 30px; }
-  .polaroid, .polaroid:nth-child(3n + 1), .polaroid:nth-child(3n + 2), .polaroid:nth-child(3n) { transform: none; }
 }
 
 /* -------------------------------------------------------------- people --- */
