@@ -23,7 +23,7 @@ export const I18N = {
       paragraphs: [
         'Matheus and Anna met in New York in 2020, shortly after Matheus finished his master’s at New York University and Anna returned from teaching in Madrid, Spain. It was a strange time to date, with the city still in lockdown, but the two made the most of socially distanced dates like picnics, hikes, and open-air dinners. In the weeks and months that followed, their initial connection grew. Their daily exchange of Whatsapp messages turned into regular weekend plans, and eventually Anna moved in with Matheus into their current home in Jersey City.',
         'Over the years, Anna and Matheus have shared many adventures, both at home and abroad. They did a short stint in Saint-Étienne, France in 2022, followed by several months in Madrid in 2024, where Anna was completing her master’s in education. Each time, the couple enjoyed discovering new parks and museums and living like locals, from the language to the food. They have been delighted to visit Matheus’s family in Brazil twice already, where Anna was met with a warm welcome. With each successive visit, she enjoys practicing her Portuguese to connect with family members and engage with Brazilian music, movies, and TV. Matheus, too, has been welcomed with open arms by Anna’s family, both in New York and in Ireland. He has enjoyed carving pumpkins for Halloween, baking gingerbread men at Christmas, and sharing stories over a cup of tea on a chilly afternoon.',
-        'The happy couple officially tied the knot with a civil ceremony at City Hall in Manhattan in 2024, and was overjoyed to celebrate at an intimate dinner surrounded by members of the bride’s family that same day. This year, after two years married and six years together, they will finally celebrate with a full-out wedding reception!',
+        'The happy couple officially tied the knot with a civil ceremony at City Hall in Manhattan in 2024, and was overjoyed to celebrate at an intimate dinner surrounded by members of the bride’s family that same day. This year, after two years married and six years together, they will finally celebrate with a full-out wedding reception including both sides of the family!',
       ],
     },
     gallery: { eyebrow: '', title: 'Moments', intro: '', placeholder: 'Photo',
@@ -242,7 +242,7 @@ export const I18N = {
       intro: 'We’re keeping the celebration intimate. Let us know if you can make it.',
       notes: [
         ['Adults only', 'As much as we love the little ones, this will be a grown-ups’ evening.'],
-        ['No plus-ones', 'Your invitation is for the names printed on it. If you’re unsure whether a guest is included, just ask us.'],
+        ['No plus-ones', 'Your invitation is for named guests only. If you’re unsure whether a guest is included, just ask us!'],
         ['Reply by September 2026', 'So we can confirm final numbers with the venue.'],
       ],
       name: 'Full name', namePh: 'Your name', email: 'Email', emailPh: 'you@email.com',
@@ -281,7 +281,7 @@ export const I18N = {
       paragraphs: [
         'Matheus e Anna se conheceram em Nova York em 2020, pouco depois de Matheus concluir o mestrado na New York University e de Anna voltar de Madri, na Espanha, onde dava aulas. Era uma época estranha para namorar, com a cidade ainda em lockdown, mas os dois aproveitaram ao máximo os encontros com distanciamento social, como piqueniques, trilhas e jantares ao ar livre. Nas semanas e meses seguintes, a conexão inicial só cresceu. A troca diária de mensagens no WhatsApp virou planos frequentes de fim de semana, até que Anna foi morar com Matheus na casa onde vivem hoje, em Jersey City.',
         'Ao longo dos anos, Anna e Matheus dividiram muitas aventuras, dentro e fora de casa. Passaram uma temporada curta em Saint-Étienne, na França, em 2022, seguida de alguns meses em Madri em 2024, onde Anna concluiu o mestrado em educação. Em cada lugar, o casal adorou descobrir novos parques e museus e viver como os locais, do idioma à comida. Eles adoraram visitar a família de Matheus no Brasil duas vezes, onde Anna foi recebida de braços abertos. A cada nova visita, ela gosta de praticar português para se aproximar dos familiares e mergulhar na música, no cinema e na TV brasileiros. Matheus, por sua vez, também foi acolhido com carinho pela família de Anna, tanto em Nova York quanto na Irlanda. Ele se divertiu esculpindo abóboras no Halloween, fazendo biscoitos de gengibre no Natal e contando histórias diante de uma xícara de chá em tardes frias.',
-        'O casal oficializou a união em uma cerimônia civil no City Hall de Manhattan em 2024, e amou comemorar com familiares da noiva no mesmo dia em um jantar intimista. Este ano, depois de dois anos de casados e seis anos juntos, eles finalmente vão celebrar sua união com uma grande festa de casamento!',
+        'O casal oficializou a união em uma cerimônia civil no City Hall de Manhattan em 2024, e amou comemorar com familiares da noiva no mesmo dia em um jantar intimista. Este ano, depois de dois anos de casados e seis anos juntos, eles finalmente vão celebrar sua união com uma grande festa de casamento com toda a família!',
       ],
     },
     gallery: { eyebrow: '', title: 'Momentos', intro: '', placeholder: 'Foto',
@@ -500,8 +500,8 @@ export const I18N = {
       intro: 'Vamos manter a celebração intimista. Conte para a gente se poderá vir.',
       notes: [
         ['Apenas adultos', 'Por mais que a gente ame as crianças, esta será uma noite para os adultos.'],
-        ['Sem acompanhantes extras', 'O convite é para os nomes nele indicados. Se tiver dúvida sobre quem está incluído, é só perguntar.'],
-        ['Responda até setembro de 2026', 'Assim conseguimos confirmar os números finais com o espaço.'],
+        ['Sem acompanhantes extras', 'O convite é para os nomes nele indicados. Se tiver dúvida sobre quem está incluído, é só perguntar!'],
+        ['Responda até setembro de 2026', 'Assim conseguiremos confirmar os números finais com o espaço.'],
       ],
       name: 'Nome completo', namePh: 'Seu nome', email: 'E-mail', emailPh: 'voce@email.com',
       phone: 'Telefone', phonePh: '+55 (12) 3456-7890',
