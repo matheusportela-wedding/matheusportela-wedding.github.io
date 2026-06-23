@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { I18N } from './content.js';
 import {
-  Nav, Hero, CoupleIntro, WeddingPartySection, EventSection,
-  TravelSection, BrazilSection, BrasiliaSection, RsvpSection,
+  Nav, Hero, CoupleIntro, StorySection, GallerySection, WeddingPartySection,
+  EventSection, TravelSection, BrazilSection, BrasiliaSection, RsvpSection,
   RegistrySection, Footer,
 } from './sections.jsx';
 import { InvitationSection } from './invitation.jsx';
 
 const PAGES = {
-  home: (L) => <React.Fragment><Hero L={L} /><CoupleIntro L={L} /></React.Fragment>,
+  home: (L) => <React.Fragment><Hero L={L} /><CoupleIntro L={L} /><StorySection L={L} /><GallerySection L={L} /></React.Fragment>,
   party: (L) => <WeddingPartySection L={L} />,
   event: (L) => <EventSection L={L} />,
   travel: (L) => <TravelSection L={L} />,

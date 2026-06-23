@@ -7,11 +7,12 @@ import { rich } from './rich.jsx';
 export const IconBadge = ({ children }) => <span className="icon-badge">{children}</span>;
 
 // Centered section header: eyebrow + script title + optional intro + ribbon.
-export const SectionHead = ({ eyebrow, title, intro }) => (
+// Pass ribbon={false} to omit the ribbon motif (e.g. the photo gallery).
+export const SectionHead = ({ eyebrow, title, intro, ribbon = true }) => (
   <div className="section-head">
-    <p className="eyebrow">{eyebrow}</p>
+    {eyebrow && <p className="eyebrow">{eyebrow}</p>}
     <h2 className="calli section-head__title">{title}</h2>
     {intro && <p className="lead section-head__intro">{rich(intro)}</p>}
-    <Ribbon className="section-head__ribbon" />
+    {ribbon && <Ribbon className="section-head__ribbon" />}
   </div>
 );

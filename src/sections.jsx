@@ -85,7 +85,7 @@ export const CoupleIntro = ({ L }) => (
   <section id="nos" className="section section--couple">
     <div className="wrap">
       <div className="couple__grid">
-        <Photo src="/images/anna-and-matheus.webp" alt="The couple" className="couple__photo" />
+        <Photo src="/images/home-the-couple.webp" alt="The couple" className="couple__photo" />
         <div>
           <p className="eyebrow">{L.couple.eyebrow}</p>
           <h2 className="calli couple__title">{L.couple.title}</h2>
@@ -97,6 +97,54 @@ export const CoupleIntro = ({ L }) => (
     </div>
   </section>
 );
+
+// ---------- OUR STORY ----------
+// Mirror of the welcome section: text on the left, photo on the right, on an
+// alternate background. Reuses the couple grid/photo styles; the photo sits
+// second in the DOM so it lands in the right-hand column.
+export const StorySection = ({ L }) => (
+  <section id="story" className="section section--alt">
+    <div className="wrap">
+      <p className="eyebrow">{L.story.eyebrow}</p>
+      <h2 className="calli couple__title">{L.story.title}</h2>
+      <div className="couple__grid">
+        <div>
+          {L.story.paragraphs.map((p) => (
+            <p className="lead">{rich(p)}</p>
+          ))}
+          <Ribbon className="couple__ribbon" />
+        </div>
+        <Photo src="/images/home-the-story.webp" className="couple__photo" alt={L.story.title} />
+      </div>
+    </div>
+  </section>
+);
+
+// ---------- PHOTO GALLERY ----------
+// Polaroid-style cards: square photo, white frame, caption underneath. Three per
+// row, collapsing to one per row below the gallery breakpoint (see styles.css).
+export const GallerySection = ({ L }) => {
+  const G = L.gallery;
+  return (
+    <section id="gallery" className="section section--page">
+      <div className="wrap">
+        <SectionHead eyebrow={G.eyebrow} title={G.title} intro={G.intro} ribbon={false} />
+        <div className="polaroid-grid">
+          {G.photos.map(({caption, img}, i) => (
+            <figure className="polaroid" key={i}>
+              <div className="polaroid__photo">
+                {img
+                  ? <img className="polaroid__img" src={img} alt={caption} />
+                  : <span className="polaroid__ph">{G.placeholder}</span>}
+              </div>
+              <figcaption className="polaroid__caption">{caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 // ---------- WEDDING PARTY ----------
 const Person = ({ name, role }) => (
