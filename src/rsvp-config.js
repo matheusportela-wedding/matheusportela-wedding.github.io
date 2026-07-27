@@ -6,7 +6,7 @@
 // responses or change anything. So it is safe to ship them in this static site.
 //
 // ── How to fill this in ───────────────────────────────────────────────────────
-// 1. Create a Google Form with these questions. Make the first five "Short answer"
+// 1. Create a Google Form with these questions. Make the first six "Short answer"
 //    and the last one "Paragraph" (short-answer types accept any text, so the
 //    front-end never has to match a fixed list of options):
 //       1) Name
@@ -14,7 +14,8 @@
 //       3) Phone
 //       4) Attending
 //       5) Guests                        (number, only sent when attending)
-//       6) Note / song request           (Paragraph)
+//       6) Dietary restrictions          (only sent when attending)
+//       7) Note / song request           (Paragraph)
 // 2. In the Form editor click ⋮ (top right) → "Get pre-filled link". Type a dummy
 //    value into every field, click "Get link", then "Copy link". The copied URL
 //    contains one `entry.XXXXXXXXX=dummy` per field — copy each numeric id below.
@@ -35,6 +36,7 @@ export const RSVP = {
     phone:     'entry.628886772',
     attending: 'entry.12547938',
     guests:    'entry.1297931199',
+    dietary:   'entry.113769329',
     note:      'entry.997537254',
   },
 
