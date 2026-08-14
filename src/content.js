@@ -53,7 +53,7 @@ export const I18N = {
       reception: { tag: 'Reception', time: '6 PM', desc: 'Right next door for dinner, toasts, and dancing.' },
       rows: [
         ['Location', 'Espaço Renascença\nSetor de Mansões Park Way Quadra 13 Conj. 01 Lote 06\nBrasília, DF, Brazil'],
-        ['Dress code', 'Formal (e.g. [long dresses and suits](https://www.theknot.com/content/formal-wedding-attire)). Open-air garden, so choose light, breathable fabrics.'],
+        ['Dress code', 'Formal (e.g. [long dresses and suits](https://www.theknot.com/content/formal-wedding-attire)).\nOpen-air garden, so choose light, breathable fabrics, and comfortable shoes (e.g. block heels).'],
         ['Weather', 'Late December is hot and humid, with a chance of quick showers. A light layer is a sensible bet.'],
       ],
       mapBtn: 'View on map' },
@@ -74,6 +74,7 @@ export const I18N = {
         ['Where to stay', 'Most hotels sit close together in the central Hotel Sectors or by Lake Paranoá. Our recommendations:', [
           'Lake Paranoá: [Royal Tulip](https://www.booking.com/hotel/br/royal-tulip-brasilia-alvorada.html) · [Brasília Palace](https://www.booking.com/hotel/br/brasilia-palace.html) · [Golden Tulip](https://www.booking.com/hotel/br/golden-tulip-brasilia-alvorada.html).',
           'North Hotel Sector: [B Hotel](https://www.booking.com/hotel/br/b-brasilia.html) · [Mercure Brasília Líder](https://www.booking.com/hotel/br/apartments-brasilia-lider.html) · [Grand Mercure](https://www.booking.com/hotel/br/brasilia-eixo.html) · [Nobile Suites Monumental](https://www.booking.com/hotel/br/nobile-suites-monumental.html) · [Windsor Brasília](https://www.booking.com/hotel/br/windsor-brasilia.html).',
+          '**Coupon ANNAEMATHEUS:** 20% discount · Dec 27, 2026 to Dec 31, 2026 · Direct reservations via the hotel websites only: [Brasília Palace](https://www.plazabrasilia.com.br/brasilia-palace) and [B Hotel](https://bhotelbrasilia.com.br/).',
           '**Pro tip:** avoid walking around the hotel sector at night — take an Uber from the lobby. [Booking.com](https://www.booking.com) is handy for managing reservations.',
         ]],
         ['When to book', 'Late December is peak Brazilian summer and holiday season, so plan ahead.', [
@@ -312,7 +313,7 @@ export const I18N = {
       reception: { tag: 'Recepção', time: '18h', desc: 'Logo ao lado, com jantar, brindes e muita dança.' },
       rows: [
         ['Local', 'Espaço Renascença\nSetor de Mansões Park Way Quadra 13 Conj. 01 Lote 06\nBrasília, DF, Brasil'],
-        ['Traje', 'Formal (como [vestidos longos e ternos](https://www.theknot.com/content/formal-wedding-attire)). Jardim ao ar livre, então prefira tecidos leves e frescos.'],
+        ['Traje', 'Formal (como [vestidos longos e ternos](https://www.theknot.com/content/formal-wedding-attire)).\nJardim ao ar livre, então prefira tecidos leves e frescos, assim como sapatos confortáveis (ex: salto bloco).'],
         ['Clima', 'O fim de dezembro é quente e úmido, com chance de chuva rápida. Leve um casaco leve por garantia.'],
       ],
       mapBtn: 'Ver no mapa' },
@@ -331,8 +332,9 @@ export const I18N = {
           '**Vacinas:** nenhuma é _exigida_ para entrar no Brasil, mas algumas são _recomendadas_ dependendo de para onde você vai. Veja o [aviso de saúde do CDC](https://wwwnc.cdc.gov/travel/destinations/traveler/none/brazil) e o [aviso para viajantes do Reino Unido](https://www.gov.uk/foreign-travel-advice/brazil/print).',
         ]],
         ['Onde ficar', 'A maioria dos hotéis fica próxima nos Setores Hoteleiros centrais ou à beira do Lago Paranoá. Nossas recomendações:', [
-          'Lago Paranoá: [Royal Tulip](https://www.booking.com/hotel/br/royal-tulip-brasilia-alvorada.html) · [Brasília Palace](https://www.booking.com/hotel/br/brasilia-palace.html) · [Golden Tulip](https://www.booking.com/hotel/br/golden-tulip-brasilia-alvorada.html).',
+          'Lago Paranoá: [Brasília Palace](https://www.booking.com/hotel/br/brasilia-palace.html) · [Royal Tulip](https://www.booking.com/hotel/br/royal-tulip-brasilia-alvorada.html) · [Golden Tulip](https://www.booking.com/hotel/br/golden-tulip-brasilia-alvorada.html).',
           'Setor Hoteleiro Norte: [B Hotel](https://www.booking.com/hotel/br/b-brasilia.html) · [Mercure Brasília Líder](https://www.booking.com/hotel/br/apartments-brasilia-lider.html) · [Grand Mercure](https://www.booking.com/hotel/br/brasilia-eixo.html) · [Nobile Suites Monumental](https://www.booking.com/hotel/br/nobile-suites-monumental.html) · [Windsor Brasília](https://www.booking.com/hotel/br/windsor-brasilia.html).',
+          '**Cupom ANNAEMATHEUS:** 20% de desconto · 27/12/2026 a 31/12/2026 · Apenas reservas diretamente com os hotéis: [Brasília Palace](https://www.plazabrasilia.com.br/brasilia-palace) e [B Hotel](https://bhotelbrasilia.com.br/).',
           '**Dica:** evite andar a pé pelo setor hoteleiro à noite — pegue um Uber na portaria. O [Booking.com](https://www.booking.com) facilita gerenciar as reservas.',
         ]],
         ['Quando reservar', 'O fim de dezembro é alta temporada de verão e festas, então planeje com antecedência.', [
