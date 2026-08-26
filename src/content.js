@@ -239,7 +239,7 @@ export const I18N = {
         { name: 'Bar Brasília', desc: 'A classic boteco with draft beer and traditional Brazilian bar food.', img: '' },
         { name: 'Clube do Choro', desc: 'Live Brazilian choro music with drinks and a bite.', img: '' },
       ] },
-    rsvp: { eyebrow: 'RSVP · please reply by September 2026', title: 'Will you come?',
+    rsvp: { eyebrow: 'RSVP · please reply by October 2026', title: 'Will you come?',
       intro: 'We’re keeping the celebration intimate. Let us know if you can make it.',
       notes: [
         ['Adults only', 'As much as we love the little ones, this will be a grown-ups’ evening.'],
@@ -499,7 +499,7 @@ export const I18N = {
         { name: 'Bar Brasília', desc: 'Um boteco clássico, com chope e comida de bar tradicional.', img: '' },
         { name: 'Clube do Choro', desc: 'Choro ao vivo, com drinques e petiscos.', img: '' },
       ] },
-    rsvp: { eyebrow: 'Confirmação · responda até setembro de 2026', title: 'Você vem?',
+    rsvp: { eyebrow: 'Confirmação · responda até outubro de 2026', title: 'Você vem?',
       intro: 'Vamos manter a celebração intimista. Conte para a gente se poderá vir.',
       notes: [
         ['Apenas adultos', 'Por mais que a gente ame as crianças, esta será uma noite para os adultos.'],
